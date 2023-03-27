@@ -1,0 +1,39 @@
+form {
+  padding: 1em 2em 3em 2em;
+  margin: 1em auto;
+  background-color: rgb(240, 240, 240);
+  width: fit-content;
+    text-align: left;
+  /* height: 13em; */
+}
+form > div {
+  padding: 1em;
+}
+
+
+label {
+  color: black;
+  font-weight: bold;
+}
+
+.btn-primary{
+  float: right;
+}
+
+
+
+
+
+@media all and (max-width: 320px) {
+  form {
+    width: 300px;
+  }
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  font-size: 0.8em;
+  padding: 0 16px;
+  display: block;
+}
