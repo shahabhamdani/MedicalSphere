@@ -86,6 +86,11 @@ class AdminHome extends Component {
     }
   };
 
+
+  handleBlogs = (heading) => {
+    this.setState({ tableHeading: heading });
+  }
+
   handleGetRegDocs = (heading) => {
     this.setState({ tableHeading: heading, DocList: this.state.regDocs });
   };
@@ -98,6 +103,8 @@ class AdminHome extends Component {
     DocList.splice(i, 1);
     this.setState({ DocList });
   };
+
+
 
   handleInvalid = (id, i) => {
     console.log("Valid: ", id);
@@ -140,6 +147,7 @@ class AdminHome extends Component {
                 handleGetValidDocs={this.handleGetValidDocs}
                 handleGetAllDocs={this.handleGetAllDocs}
                 handleGetRegDocs={this.handleGetRegDocs}
+                handleBlogs={this.handleBlogs}
               />
             </div>
             <div className="tableDiv">

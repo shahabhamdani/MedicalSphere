@@ -7,7 +7,7 @@ import HomePage from './components/homePage';
 import PatientHome from './components/patientHome';
 import AdminHome from './components/adminHome';
 import DoctorHome from './components/doctorHome';
-
+import Blog from './components/blog';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const initialState = {};
@@ -49,6 +49,9 @@ class App extends Component {
             <Route path="/patient" element={ <PatientHome user="patient" patient={this.state.userDetails} showProf={this.state.showProf} showProfile={this.showProfile} />} />
             <Route path="/admin" element={ <AdminHome user="admin" admin={this.state.userDetails} showProf={this.state.showProf} showProfile={this.showProfile} />} />
             <Route path="/doctor" element={ <DoctorHome user="doctor" doctor={this.state.userDetails} showProf={this.state.showProf} showProfile={this.showProfile} />} />
+            <Route path="/blog/:id" element={<Blog  />} />
+
+
           </Routes>
         </Router>
 

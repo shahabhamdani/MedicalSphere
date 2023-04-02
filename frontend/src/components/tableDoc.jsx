@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./tableDoc.css";
+import BlogCrud from "./BlogCrud";
 
 class TableDoc extends Component {
   state = {};
@@ -64,6 +65,10 @@ class TableDoc extends Component {
           <td>{d.LOCATION }</td>
         </tr>
       ));
+    }
+
+    else if (this.props.tabHead === "Blogs"){
+      tableContent = (<BlogCrud/>);
     }
     return (
       <div>

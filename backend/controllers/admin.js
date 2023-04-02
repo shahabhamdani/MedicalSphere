@@ -1,3 +1,8 @@
+const fs = require('fs');
+const path = require('path');
+const streamifier = require('streamifier');
+
+
 //Lists all the registered doctors
 //Inputs: - 
 //Response: DOC_ID, NAME, REGNO, SPECIALIZATION, LOCATION
@@ -16,19 +21,192 @@ const handleGetRegisterDocs = (req, res, db) => {
         .catch(err => res.json('error getting docs'))
 }
 
+
+//Get all Blogs
+
 const handleGetBlogs = (req, res, db) => {
-    // console.log("requested")
-    return db.select("*")
-        .from('blogs')
-        .then(blogs => {
-            if (blogs.length)
-                res.json(blogs)
-            else
-                res.json("NO")
+    db.select('id', 'title', 'text', 'image', 'date', 'time')
+      .from('blogs')
+      .then((data) => {
+        const blogs = data.map((blog) => {
+          if (blog.image) {
+            const base64Image = fs.readFileSync(path.join(__dirname, `../uploads/${blog.image}`), { encoding: 'utf8' });
+            return {
+              id: blog.id,
+              title: blog.title,
+              text: blog.text,
+              image: base64Image,
+              date: blog.date,
+              time: blog.time,
+            };
+          } else {
+            return {
+              id: blog.id,
+              title: blog.title,
+              text: blog.text,
+              image: null,
+              date: blog.date,
+              time: blog.time,
+            };
+          }
+        });
+        res.json(blogs);
+      })
+      .catch((err) => res.status(400).json('Error getting blogs'));
+  };
+
+
+  
+const handleGetSingleBlog = (req, res, db) => {
+    db.select('id', 'title', 'text', 'image', 'date', 'time')
+      .from('blogs')
+      .where({ id: req.params.id })
+      .then((data) => {
+        const blogs = data.map((blog) => {
+          if (blog.image) {
+            const base64Image = fs.readFileSync(path.join(__dirname, `../uploads/${blog.image}`), { encoding: 'utf8' });
+            return {
+              id: blog.id,
+              title: blog.title,
+              text: blog.text,
+              image: base64Image,
+              date: blog.date,
+              time: blog.time,
+            };
+          } else {
+            return {
+              id: blog.id,
+              title: blog.title,
+              text: blog.text,
+              image: null,
+              date: blog.date,
+              time: blog.time,
+            };
+          }
+        });
+        res.json(blogs);
+      })
+      .catch((err) => res.status(400).json('Error getting blogs'));
+  };
+
+//Update a Blog
+const handleUpdateBlog = (req, res, db) => {
+   
+
+        const { title, text, date, time } = req.body;
+        const file = req.body.image;
+      
+        // Convert the Blob to a stream using streamifier
+        const stream = streamifier.createReadStream(file);
+      
+        // Convert the stream to a buffer
+        let buffer = Buffer.from([]);
+        stream.on('data', (chunk) => {
+          buffer = Buffer.concat([buffer, chunk]);
+        });
+      
+        stream.on('end', () => {
+          // Convert the buffer to a base64 string
+          const base64Image = buffer.toString('base64');
+      
+          // Determine the MIME type of the image
+          const mimeType = file.type === 'image/jpeg' ? 'jpeg' : 'png';
+      
+          // Save the base64 string as an image file
+          const filename = `${Date.now()}.${mimeType}`;
+          const filepath = path.join(__dirname, '../uploads', filename);
+          require('fs').writeFile(filepath, base64Image, { encoding: 'base64' }, (err) => {
+            if (err) {
+              console.log(err);
+              return res.status(500).send({ error: 'Error saving file' });
+            }
+      
+            // Save the file path to the database
+            return     db('blogs')
+            .where({ id: req.params.id })
+              .update({
+                title: title,
+                text: text,
+                image: filename,
+                date: date,
+                time: time,
+              })
+
+              .catch((err) => {
+                console.log(err);
+                return res.status(500).send({ error: 'Error saving to database' });
+              })
+               .then(numRowsAffected => {
+            if (numRowsAffected > 0) {
+                res.json({ message: "Blog post updated successfully." });
+            } else {
+                res.status(404).json({ error: "Blog post not found." });
+            }
         })
-        .catch(err => res.json('error getting blogs'))
+          });
+        });
+
+};
+
+
+
+//Delete a Blog
+const handleDeleteBlog = (req, res, db) => {
+    db('blogs')
+        .where({ id: req.params.id })
+        .del()
+        .catch(err => console.log(err))
+        .then(r => res.json(`Removed`))
 }
 
+
+const handleCreateBlog = (req, res, db) => {
+    const { title, text, date, time } = req.body;
+    const file = req.body.image;
+  
+    // Convert the Blob to a stream using streamifier
+    const stream = streamifier.createReadStream(file);
+  
+    // Convert the stream to a buffer
+    let buffer = Buffer.from([]);
+    stream.on('data', (chunk) => {
+      buffer = Buffer.concat([buffer, chunk]);
+    });
+  
+    stream.on('end', () => {
+      // Convert the buffer to a base64 string
+      const base64Image = buffer.toString('base64');
+  
+      // Determine the MIME type of the image
+      const mimeType = file.type === 'image/jpeg' ? 'jpeg' : 'png';
+  
+      // Save the base64 string as an image file
+      const filename = `${Date.now()}.${mimeType}`;
+      const filepath = path.join(__dirname, '../uploads', filename);
+      require('fs').writeFile(filepath, base64Image, { encoding: 'base64' }, (err) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).send({ error: 'Error saving file' });
+        }
+  
+        // Save the file path to the database
+        return db
+          .insert({
+            title: title,
+            text: text,
+            image: filename,
+            date: date,
+            time: time,
+          })
+          .into('blogs')
+          .catch((err) => {
+            console.log(err);
+            return res.status(500).send({ error: 'Error saving to database' });
+          })
+          .then((r) => res.json(`Added!`));
+      });
+    });
+  };
 
 const handleGetAllDocs = (req, res, db) => {
     return db.select('DOC_ID', 'NAME', 'REGNO', 'SPECIALIZATION', 'LOCATION')
@@ -208,5 +386,9 @@ module.exports = {
     handleGetAllDocs: handleGetAllDocs,
     handleGetValidDocs: handleGetValidDocs,
     handleSearchInAllDocs: handleSearchInAllDocs,
-    handleGetBlogs: handleGetBlogs
+    handleGetBlogs: handleGetBlogs,
+    handleUpdateBlog: handleUpdateBlog,
+    handleDeleteBlog:handleDeleteBlog,
+    handleCreateBlog:handleCreateBlog,
+    handleGetSingleBlog:handleGetSingleBlog
 }

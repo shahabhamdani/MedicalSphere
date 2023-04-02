@@ -11,8 +11,8 @@ const app = express();
 
 //Middlewares
 app.use(cors());
-app.use(bodyParser.json());
-
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // Links to all the required route handlers
 const register = require('./controllers/register');
@@ -58,6 +58,15 @@ app.get('/admin/getValidDocs', (req, res) => admin.handleGetValidDocs(req, res, 
 app.get('/admin/searchInAllDocs', (req, res) => admin.handleSearchInAllDocs(req, res, db))
 
 
+//Routes for handleing Admin blog activities, forwarded to  -> admin.js 
+
+app.get('/blogs/:id', (req, res) => admin.handleGetSingleBlog(req, res, db))
+
+app.get('/blogs', (req, res) => admin.handleGetBlogs(req, res, db))
+app.put('/admin/blogs/:id', (req, res) => admin.handleUpdateBlog(req, res, db));
+app.post('/admin/blogs', (req, res) => admin.handleCreateBlog(req,res, db));
+app.delete('/admin/blogs/:id', (req, res) => admin.handleDeleteBlog(req, res, db));
+
 
 
 //Routes for  inventory related activities, forwarded to  -> inventory.js 
@@ -66,9 +75,7 @@ app.get('/patient/getPharmacy/:id', (req, res) => patient.handleGetPharmacy(req,
 
 
 
-//Routes for blog related activities
-app.get('/getBlogs', (req, res) => admin.handleGetBlogs(req, res, db))
-app.get('/blog/:id', (req, res) => admin.handleBlog(req, res, db))
+
 
 
 

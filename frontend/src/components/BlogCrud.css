@@ -1,0 +1,15 @@
+form#blogForm {
+    width: -webkit-fill-available;
+}
+
+img.bmImage {
+    display: list-item;
+    width: 180px;
+    height: 180px;
+}
+
+
+.bmBts {
+    display: -webkit-inline-box;
+    float: right;
+}

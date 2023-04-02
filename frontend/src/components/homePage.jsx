@@ -1,7 +1,26 @@
 import React, { Component } from "react";
 import "./homePage.css";
+import { Link } from "react-router-dom";
+
 
 class HomePage extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      blogs: [],
+     
+    };
+    
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:3001/blogs")
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ blogs: data });
+      });
+  }
   render() {
     return (
       <div>
@@ -64,10 +83,13 @@ class HomePage extends Component {
                 <em>Get Prescription</em>
                 <h1>Get Prescription based on your symptoms</h1>
                 <p>
-                  An AI based system which provides you with the medical prescription based on your symptoms by using the NLP natural language processing
+                  An AI based system which provides you with the medical
+                  prescription based on your symptoms by using the NLP natural
+                  language processing
                 </p>
                 <p>
-                  MEDICAL SPHERE will give you goosebumps with its AI Prescribtion.{" "}
+                  MEDICAL SPHERE will give you goosebumps with its AI
+                  Prescribtion.{" "}
                 </p>
               </td>
             </tr>
@@ -143,85 +165,49 @@ class HomePage extends Component {
 
         <section class="section4">
           <div class="title_header">
-            <h1>Our Gallery Portfolio</h1>
+            <h1>Our Health Blogs</h1>
           </div>
-          <div class="row">
-            <div class="column">
-             <img alt=""
 
-                src="https://i.ibb.co/Sft7gKp/bg2.webp"
-                Style="width:100%; height:100%;"
-                onclick="openModal();currentSlide(1)"
-                class="hover-shadow cursor"
-              />
-            </div>
-            <div class="column">
-              <img
-              
-                src="https://i.ibb.co/Sft7gKp/bg2.webp"
-                Style="width:100%; height:100%;"
-                onclick="openModal();currentSlide(2)"
-                class="hover-shadow  cursor"
-                alt=""
+          <div class="blog-posts-wrap">
 
-              />
-            </div>
-            <div class="column">
-              <img                alt=""
+          {this.state.blogs.length ? (
+            this.state.blogs.map((blog) => (
+              <div className=" my-3" key={blog.id}>
 
-                src="https://i.ibb.co/Sft7gKp/bg2.webp"
-                Style="width:100%; height:100%;"
-                onclick="openModal();currentSlide(3)"
-                class="hover-shadow  cursor"
-              />
-            </div>
-            <div class="column">
-              <img                alt=""
+              <Link class="post-link" to = {`/blog/${blog.id}`}>
+              <div class="post-wrap">
+                  <img class='post-image' src={blog.image} />
+                <div class="post-body">
+                  <div class="post-body-primary">
+                    <div class="post-meta">
+                      <p>
+                        by <b>Admin</b>{blog.date +" "+ blog.time}
+                      </p>
+                    </div>
+                    <div class="post-title">
+                      <h2>{blog.title}</h2>
+                    </div>
 
-                src="https://i.ibb.co/Sft7gKp/bg2.webp"
-                Style="width:100%; height:100%;"
-                onclick="openModal();currentSlide(4)"
-                class="hover-shadow  cursor"
-              />
-            </div>
-            <div class="column">
-             <img alt=""
+                    <div class="post-text">
+                      <p>{blog.text}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
 
-                src="https://i.ibb.co/Sft7gKp/bg2.webp"
-                Style="width:100%; height:100%;"
-                onclick="openModal();currentSlide(5)"
-                class="hover-shadow  cursor"
-              />
-            </div>
-            <div class="column">
-             <img alt=""
 
-                src="https://i.ibb.co/Sft7gKp/bg2.webp"
-                Style="width:100%; height:100%;"
-                onclick="openModal();currentSlide(6)"
-                class="hover-shadow  cursor"
-              />
-            </div>
-            <div class="column">
-             <img alt=""
+          </div>
+            ))
+          ) : (
+            <p>No blogs to display</p>
+          )}
 
-                src="https://i.ibb.co/Sft7gKp/bg2.webp"
-                Style="width:100%; height:100%;"
-                onclick="openModal();currentSlide(7)"
-                class="hover-shadow  cursor"
-              />
-            </div>
-            <div class="column">
-             <img alt=""
-
-                src="https://i.ibb.co/Sft7gKp/bg2.webp"
-                Style="width:100%; height:100%;"
-                onclick="openModal();currentSlide(8)"
-                class="hover-shadow  cursor"
-              />
-            </div>
+            
+            
           </div>
         </section>
+
         <div id="myModal" class="modal">
           <span class="close cursor" onclick="closeModal()">
             &times;
@@ -229,8 +215,8 @@ class HomePage extends Component {
           <div class="modal-content">
             <div class="mySlides">
               <div class="numbertext">1 / 7</div>
-             <img alt=""
-
+              <img
+                alt=""
                 src="https://i.ibb.co/Sft7gKp/bg2.webp"
                 class="animate"
                 Style="width:100%"
@@ -239,8 +225,8 @@ class HomePage extends Component {
 
             <div class="mySlides">
               <div class="numbertext">2 / 7</div>
-             <img alt=""
-
+              <img
+                alt=""
                 src="https://i.ibb.co/Sft7gKp/bg2.webp"
                 class="animate"
                 Style="width:100%"
@@ -249,8 +235,8 @@ class HomePage extends Component {
 
             <div class="mySlides">
               <div class="numbertext">3 / 7</div>
-             <img alt=""
-
+              <img
+                alt=""
                 src="https://i.ibb.co/Sft7gKp/bg2.webp"
                 class="animate"
                 Style="width:100%"
@@ -259,8 +245,8 @@ class HomePage extends Component {
 
             <div class="mySlides">
               <div class="numbertext">4 / 7</div>
-             <img alt=""
-
+              <img
+                alt=""
                 src="https://i.ibb.co/Sft7gKp/bg2.webp"
                 class="animate"
                 Style="width:100%"
@@ -269,8 +255,8 @@ class HomePage extends Component {
 
             <div class="mySlides">
               <div class="numbertext">5 / 7</div>
-             <img alt=""
-
+              <img
+                alt=""
                 src="https://i.ibb.co/Sft7gKp/bg2.webp"
                 class="animate"
                 Style="width:100%"
@@ -279,8 +265,8 @@ class HomePage extends Component {
 
             <div class="mySlides">
               <div class="numbertext">6 / 7</div>
-             <img alt=""
-
+              <img
+                alt=""
                 src="https://i.ibb.co/Sft7gKp/bg2.webp"
                 class="animate"
                 Style="width:100%"
@@ -289,8 +275,8 @@ class HomePage extends Component {
 
             <div class="mySlides">
               <div class="numbertext">7 / 7</div>
-             <img alt=""
-
+              <img
+                alt=""
                 src="https://i.ibb.co/Sft7gKp/bg2.webp"
                 class="animate"
                 Style="width:100%"
@@ -310,79 +296,16 @@ class HomePage extends Component {
           </div>
         </div>
 
-       <img alt=""
- src="https://i.ibb.co/ZLHbWJz/footer.png" class="footer_image" />
+        <img
+          alt=""
+          src="https://i.ibb.co/ZLHbWJz/footer.png"
+          class="footer_image"
+        />
         <footer>
-          <div class="column">
-            <span class="footer_title">COMPANY_NAME</span>
-            <a href="/#">
 
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </a>
-            <a href="/#" title="Facebook">
-              <i class="fa fa-facebook"></i>
-            </a>
-            <a href="/#" title="Instagram">
-              <i class="fa fa-instagram"></i>
-            </a>
-            <a href="/#" title="Twitter">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </div>
-          <div class="column">
-            <a href="/#" class="footer_title">OTHER LINKS</a>
-            <a href="/#">Privacy Policy</a>
-            <a href="/#">Terms & Conditions</a>
-            <a href="/#">Ticket</a>
-            <a href="/#">Contact Us</a>
-          </div>
-          <div class="column">
-            <a href="/#" class="footer_title">SHORT CUT</a>
-            <a href="/#">Our Services</a>
-            <a href="/#">Our Blog</a>
-            <a href="/#">Our Projects</a>
-            <a href="/#">About Us</a>
-          </div>
-          <div class="column">
-            <a href="/#" class="footer_title">LATEST NEWS</a>
-            <a href="/#" title="Lorem ipsum dolor sit amet">
-             <img alt=""
- src="https://source.unsplash.com/50x50/?green,trees" />
-            </a>
-            <a href="/#" title="Lorem ipsum dolor sit amet">
-             <img alt=""
- src="https://source.unsplash.com/50x50/?green,tree" />
-            </a>
-            <a href="/#" title="Lorem ipsum dolor sit amet">
-             <img alt=""
- src="https://source.unsplash.com/50x50/?green,plant" />
-            </a>
-            <a href="/#" title="Lorem ipsum dolor sit amet">
-             <img alt=""
- src="https://source.unsplash.com/50x50/?green,forest" />
-            </a>
-            <a href="/#" title="Lorem ipsum dolor sit amet">
-             <img alt=""
- src="https://source.unsplash.com/50x50/?green,afforestation" />
-            </a>
-          </div>
-          <div class="column">
-            <a href="/#" class="footer_title">GET IN TOUCH</a>
-            <a href="/#" title="Address">
-              <i class="fa fa-map-marker"></i> 007, street, province/state,
-              country - zipcode
-            </a>
-            <a href="emailto:" title="Email">
-              <i class="fa fa-envelope"></i> email@serviceprovider.domain
-            </a>
-            <a href="tel:" title="Contact">
-              <i class="fa fa-phone"></i> +(x)-xxxx-xxxxx
-            </a>
-          </div>
 
           <div class="sub-footer">
-            © CopyRights 2021 Company_name || All rights reserved
+            © CopyRights 2023 MedicalSphere || All rights reserved
           </div>
         </footer>
       </div>

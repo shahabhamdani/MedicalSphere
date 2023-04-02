@@ -300,6 +300,7 @@ class DoctorHome extends Component {
                 getConfirmedApp={this.getConfirmedApp}
                 getHistory={this.getHistory}
                 getFeedBack={this.getFeedBack}
+                
               />
             </div>
             <div className="container">

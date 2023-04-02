@@ -84,13 +84,18 @@ class Taskbar extends Component {
     this.props.getHistory("History");
   };
 
+  handleBlogs = () =>{
+    this.props.handleBlogs("Blogs");
+  }
+
   render() {
     let btn1,
       btn2,
       btn3,
       btn5 = null,
       btn4 = null,
-      filter = null;
+      btn6 = null
+
 
     if (this.props.user === "patient") {
       btn1 = "Available Doctors";
@@ -112,6 +117,10 @@ class Taskbar extends Component {
       btn1 = "Registered Doctors";
       btn2 = "Valid Doctors";
       btn3 = "All Doctors";
+      btn6 = (
+      <button id="blogs" onClick={this.handleBlogs}>
+          Bologs
+        </button>);
     } else if (this.props.user === "doctor") {
       btn1 = "New Appointments";
       btn2 = "Accepted Appointments";
@@ -144,6 +153,7 @@ class Taskbar extends Component {
 
           {btn4}
           {btn5}
+          {btn6}
 
 
         </div>
