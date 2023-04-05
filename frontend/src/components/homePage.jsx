@@ -2,16 +2,12 @@ import React, { Component } from "react";
 import "./homePage.css";
 import { Link } from "react-router-dom";
 
-
 class HomePage extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       blogs: [],
-     
     };
-    
   }
 
   componentDidMount() {
@@ -137,20 +133,23 @@ class HomePage extends Component {
           <div class="cards">
             <div class="card">
               <section>
-                <h1>Laboratory Services</h1>
-                <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
+                <h1>Online Appointment Booking</h1>
+                <h4>Users can book online appointment</h4>
               </section>
             </div>
             <div class="card">
               <section>
-                <h1>General Treatment</h1>
-                <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
+                <h1>Pharmacy Module</h1>
+                <h4>
+                  Patient can check his medicine code and get the medicine from
+                  pharmacy
+                </h4>
               </section>
             </div>
             <div class="card">
               <section>
-                <h1>Orthopedician</h1>
-                <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
+                <h1>Health Blogs</h1>
+                <h4>Users have access to our latest health blogs</h4>
               </section>
             </div>
           </div>
@@ -169,42 +168,45 @@ class HomePage extends Component {
           </div>
 
           <div class="blog-posts-wrap">
+            {this.state.blogs.length ? (
+              this.state.blogs.map((blog) => (
+                <div className=" my-3" key={blog.id}>
+                  <Link class="post-link" to={`/blog/${blog.id}`}>
+                    <div class="post-wrap">
+                      <img class="post-image" src={blog.image} />
+                      <div class="post-body">
+                        <div class="post-body-primary">
+                          <div class="post-meta">
+                            <p>
+                              by <b>Admin</b>
+                              {blog.date + " " + blog.time}
+                            </p>
+                          </div>
+                          <div class="post-title">
+                            <h2>{blog.title}</h2>
+                          </div>
 
-          {this.state.blogs.length ? (
-            this.state.blogs.map((blog) => (
-              <div className=" my-3" key={blog.id}>
+                          <div class="post-text">
+                           
+                        
+                          <p>{blog.text}</p>
 
-              <Link class="post-link" to = {`/blog/${blog.id}`}>
-              <div class="post-wrap">
-                  <img class='post-image' src={blog.image} />
-                <div class="post-body">
-                  <div class="post-body-primary">
-                    <div class="post-meta">
-                      <p>
-                        by <b>Admin</b>{blog.date +" "+ blog.time}
-                      </p>
-                    </div>
-                    <div class="post-title">
-                      <h2>{blog.title}</h2>
-                    </div>
+                            {/* <div
+                              style={{ maxHeight: "6em", overflow: "hidden" }}>
+                              <p>{blog.text}</p>
+                            </div> */}
 
-                    <div class="post-text">
-                      <p>{blog.text}</p>
+
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
-              </div>
-            </Link>
-
-
-          </div>
-            ))
-          ) : (
-            <p>No blogs to display</p>
-          )}
-
-            
-            
+              ))
+            ) : (
+              <p>No blogs to display</p>
+            )}
           </div>
         </section>
 
@@ -302,8 +304,6 @@ class HomePage extends Component {
           class="footer_image"
         />
         <footer>
-
-
           <div class="sub-footer">
             © CopyRights 2023 MedicalSphere || All rights reserved
           </div>

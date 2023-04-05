@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -367,11 +368,14 @@ color:gray;
 font-weight:200;
 }
 
+
+
 .section3 .cards .card section h1{
 color:#167ce9;
 }
 
 .section3 .content{
+  display: block;
 position:absolute;
 top:20vh;
 right:2vw;
