@@ -1,19 +1,18 @@
 import React, { Component } from "react";
 import "./tableDoc.css";
 
-
 class DocHomeTable extends Component {
   state = {};
 
   handlePrescription = (a, i) => {
-
+    
     this.props.setAppPatInfo(a);
 
-//    this.props.handleTreated(a, i);
-  }
+  };
+
   render() {
     let tableHead, tableContent;
-    
+
     // console.log(this.props.tableData);
     if (this.props.tableHeading === "New Appointments") {
       tableHead = (
@@ -34,7 +33,7 @@ class DocHomeTable extends Component {
           <td>{a.PHONE_NUMBER}</td>
           <td>{a.DATE}</td>
           <td>{a.TIME}</td>
-          <td Style={ "float:right"}  className="btn btn-success m-3 p-1">
+          <td Style={"float:right"} className="btn btn-success m-3 p-1">
             <span
               onClick={() => this.props.handleConfirmApp(a, i)}
               id={a.DOC_ID}
@@ -72,17 +71,17 @@ class DocHomeTable extends Component {
           <td>{a.DATE}</td>
           <td>{a.TIME}</td>
           <td style={{ textAlign: "center" }} className="confirm">
-          <button className="btn btn-primary  p-1"
+            <button
+              className="btn btn-primary  p-1"
               onClick={() => this.handlePrescription(a, i)}
               id={a.DOC_ID}
             >
               Prescribe
             </button>
-           
-
           </td>
           <td style={{ textAlign: "center" }} className="cancel">
-            <button className="btn btn-danger p-1"
+            <button
+              className="btn btn-danger p-1"
               onClick={() => this.props.handleDinCome(a, i)}
               id={a.DOC_ID}
             >
@@ -124,8 +123,6 @@ class DocHomeTable extends Component {
         </tr>
       ));
     }
-
-
 
     return (
       <div>

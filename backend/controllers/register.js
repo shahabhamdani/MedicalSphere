@@ -110,78 +110,20 @@ const handleRegisterDoc = (req, res, db) => {
 
 
 
-const handleRegisterDoc_v1 = (req, res, db) => {
-    // console.log(req.body)
-    const { name, email, number, password, specialization, regNo, location } = req.body;
-    var lindex = 0;
-    if (name && email && number && password && specialization && regNo && location) {
-
-        db
-            .insert({
-                NAME: name,
-                EMAIL: email,
-                PHONE_NUMBER: number,
-                REGNO: regNo,
-                SPECIALIZATION: specialization,
-                LOCATION: location
-            })
-            .into('registerdoctor')
-            .catch(err => { res.json("Please enter unique user name") })
-            .then(db.select('last_inserted_id()').from('registerdoctor'))
-            .then(id => {
-                lindex = id[0];
-                // console.log("reg" + lindex);
-            })
-            .then((e) => {
-
-                db.insert({
-                    DOC_ID: lindex,
-                    EMAIL: email,
-                    PASSWORD: password,
-                })
-                    .into('doctorcredentials')
-                    .catch(err => { res.json(err) })
-            })
-            .catch(err => { res.json(err.sqlMessage) })
-            .then(e => {
-                // console.log("all" + lindex);
-
-                db
-                    .insert({
-                        DOC_ID: lindex,
-                        NAME: name,
-                        EMAIL: email,
-                        PHONE_NUMBER: number,
-                        REGNO: regNo,
-                        SPECIALIZATION: specialization,
-                        LOCATION: location
-                    })
-                    .into('alldoctors')
-                    .then(() => {
-                        db.select('NAME').from('registerdoctor').where({ DOC_ID: lindex })
-                            .then(user => res.json(user[0]))
-                    })
-                    .catch(e => { res.json(e) })
-            })
-            .catch(err => res.json(err.sqlMessage))
-
-
-    }
-    else {
-        res.json("field not filled")
-    }
-}
-
 //For registering new patient.
 //Input: name, password, gender, dob, email, phone, marital_status, address
 //Response: NAME of the registered person OR if name already exists gives Error
 const handleRegisterPatient = (req, res, db) => {
+    
+    
     const { name, password, gender, dob, email, phone, marital_status, address } = req.body;
+
     var lindex = 0;
+
+
     if (name && password && gender && dob && email && phone && marital_status && address) {
 
-        db
-            .insert({
+        db.insert({
                 NAME: name,
                 GENDER: gender,
                 DOB: dob,
@@ -217,6 +159,8 @@ const handleRegisterPatient = (req, res, db) => {
 }
 
 //Exporting the functions
+
+
 module.exports = {
     handleRegisterAdmin: handleRegisterAdmin,
     handleRegisterDoc: handleRegisterDoc,

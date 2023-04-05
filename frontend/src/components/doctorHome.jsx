@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Taskbar from "./taskbar";
 import ProfileDisplayModal from "./profileDispMdl";
-
 import DocHomeTable from "./docHomeTable";
-
 import PrescriptionModal from "./prescriptionModal";
 
 class DoctorHome extends Component {
+
+
   state = {
     appList: [],
     confApp: [],
@@ -19,20 +19,38 @@ class DoctorHome extends Component {
     appPatInfo: "",
     metrics: [],
   };
+
+
   _isMounted = false;
 
+
+
+
+
+
+
+
+
+
+
   componentDidMount() {
+
+
     let doctor = this.props.doctor;
+
     fetch(`http://localhost:3001/doctor/getDoctorMetrics/${doctor.DOC_ID}`)
-      .then((res) => res.json())
+      
+    .then((res) => res.json())
       .then((res) => {
         if (res !== "NO")
-          this.setState({
+        this.setState({
             metrics: res,
-          });
+          });        
       });
 
+
     this._isMounted = true;
+
     if (this.state.docDetails) {
       fetch(
         `http://localhost:3001/doctor/getAppointments/${this.state.docDetails.DOC_ID}`
@@ -57,6 +75,10 @@ class DoctorHome extends Component {
     }
   }
 
+
+
+
+
   handleConfirmApp = (a, i) => {
     let load = {
       method: "POST",
@@ -68,6 +90,8 @@ class DoctorHome extends Component {
         time_slot: a.TIME,
       }),
     };
+
+
     // console.log(load);
     fetch("http://localhost:3001/doctor/confirmAppointment", load)
       .then((res) => res.json())
@@ -109,9 +133,13 @@ class DoctorHome extends Component {
       });
   };
 
+
+
   setAppPatInfo = (pat) => {
     this.setState({ appPatInfo: pat, dispPresMdl: true });
   };
+
+
 
   hideModal = () => {
     this.setState({ dispPresMdl: false });
@@ -263,8 +291,14 @@ class DoctorHome extends Component {
   componentWillUnmount() {
     this._isMounted = false;
   }
+
+  
   render() {
+
+
     let prescriptionModal = null;
+
+
     if (this.state.dispPresMdl) {
       prescriptionModal = (
         <PrescriptionModal
@@ -345,6 +379,8 @@ class DoctorHome extends Component {
               </div>
 
               <h1 id="heading">{this.state.tableHeading}</h1>
+              
+              
               <DocHomeTable
                 user={this.props.user}
                 tableHeading={this.state.tableHeading}
@@ -355,6 +391,7 @@ class DoctorHome extends Component {
                 handleTreated={this.handleTreated}
                 handleDinCome={this.handleDinCome}
               />
+
 
               <p>{this.state.emptyListMsg}</p>
             </div>

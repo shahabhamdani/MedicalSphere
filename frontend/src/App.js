@@ -10,15 +10,23 @@ import DoctorHome from './components/doctorHome';
 import Blog from './components/blog';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+
 const initialState = {};
+
+
+
 class App extends Component {
+
   state = {
     initialState,
     isSignedIn: sessionStorage.getItem("isSignedIn"),
     userClass: sessionStorage.getItem("userType"),
     userDetails: JSON.parse(sessionStorage.getItem("user")),
-    showProf: false
+    showProf: false,
+    a:""
   };
+
+
   loadUser = (userType, user) => {
     // console.log("Appp", user)
     sessionStorage.setItem("user", JSON.stringify(user));
@@ -37,12 +45,16 @@ class App extends Component {
   showProfile = (val) => {
     this.setState({ showProf: val })
   }
+
+
+
   render() {
+
     return (
       <div className="App">
         <Router>
           <Navbar setIsSignedIn={this.setIsSignedIn} showProfile={this.showProfile} />
-          <Routes>
+          <Routes> 
             <Route path='/'  element={<HomePage/>} />
             <Route path="/signinTabSel"  element={<SigninTabSel handleLoadUser={this.loadUser} setIsSignedIn={this.setIsSignedIn} />} />
             <Route path="/regTabSel"  element={<RegisterTabSel />} />
@@ -50,7 +62,6 @@ class App extends Component {
             <Route path="/admin" element={ <AdminHome user="admin" admin={this.state.userDetails} showProf={this.state.showProf} showProfile={this.showProfile} />} />
             <Route path="/doctor" element={ <DoctorHome user="doctor" doctor={this.state.userDetails} showProf={this.state.showProf} showProfile={this.showProfile} />} />
             <Route path="/blog/:id" element={<Blog  />} />
-
 
           </Routes>
         </Router>
