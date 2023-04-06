@@ -22,7 +22,11 @@ class PatientHome extends Component {
     emptyListMsg: "",
     metrics: [],
   };
+
+
   _isMounted = false;
+
+
 
   componentDidMount() {
     // fetch(
@@ -44,6 +48,8 @@ class PatientHome extends Component {
       });
 
     this._isMounted = true;
+
+
     fetch("http://localhost:3001/patient/getDoctor")
       .then((response) => response.json())
       .then((docs) => {
@@ -224,8 +230,10 @@ class PatientHome extends Component {
   };
 
   render() {
+
     let profileModal = null,
       bookModal = null;
+
     if (this.state.dispBookMdl) {
       bookModal = (
         <BookModal doc={this.state.appDocInfo} hideMdl={this.hideModal} />
@@ -244,10 +252,12 @@ class PatientHome extends Component {
     } else {
       profileModal = null;
     }
+
     return (
       <div>
         {sessionStorage.getItem("user") &&
         sessionStorage.getItem("userType") === "patient" ? (
+
           <div className="content">
             <div className="taskbarDiv">
               <Taskbar

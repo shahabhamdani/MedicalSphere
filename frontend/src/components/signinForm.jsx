@@ -3,6 +3,8 @@ import "./signinForm.css";
 import { Navigate } from "react-router-dom";
 
 class SignInForm extends Component {
+
+
   state = {
     userType: this.props.userType,
     userName: this.props.userType + "_userName",
@@ -12,17 +14,26 @@ class SignInForm extends Component {
     redirect: false,
   };
 
+
+
+
+
   handleuserNameChange = (name) => {
     this.setState({ userNameVal: name.target.value });
   };
+
   handlePassChange = (pass) => {
     this.setState({ userPassVal: pass.target.value });
   };
 
+
   handleSubmit = (event) => {
+
     event.preventDefault();
 
     let requestPath;
+
+
     switch (this.state.userType) {
       case "doctor":
         requestPath = "/loginDoc";
@@ -35,6 +46,7 @@ class SignInForm extends Component {
         break;
       default:
     }
+
 
     let load = {
       method: "POST",
@@ -70,6 +82,10 @@ class SignInForm extends Component {
       });
     document.getElementById(`${this.state.userType}_signInFrm`).reset();
   };
+
+  
+
+
 
   render() {
     if (this.state.redirect) {

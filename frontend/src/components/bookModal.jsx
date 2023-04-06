@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./bookModal.css";
 
 class BookModal extends Component {
+  
   state = {
     // user: JSON.parse(sessionStorage.getItem("user")),
     doc_id: this.props.doc.DOC_ID,

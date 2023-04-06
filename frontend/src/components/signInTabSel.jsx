@@ -6,11 +6,13 @@ class SigninTabSel extends Component {
   componentDidMount() {
     document.getElementById("patient_tab_btn").click();
   }
+
   openSignIn = (evt, usrType) => {
     // Declare all variables
     var i, tabcontent, tablinks;
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("tabcontent");
+
     for (i = 0; i < tabcontent.length; i++) {
       tabcontent[i].style.display = "none";
     }
@@ -25,6 +27,7 @@ class SigninTabSel extends Component {
   };
 
   state = {};
+
   render() {
     // document.getElementById("Patient").style.display = "block";
     // document.getElementById("patient_tab_btn").className += " active";
@@ -49,11 +52,11 @@ class SigninTabSel extends Component {
           <button
             id="admin_tab_btn"
             className="tablinks"
-            onClick={(e) => this.openSignIn(e, "Admin")}
-          >
+            onClick={(e) => this.openSignIn(e, "Admin")} >
             Admin
           </button>
         </div>
+
 
         <div id="Patient" className="tabcontent">
           <h3>Sign in as Patient</h3>
@@ -64,6 +67,7 @@ class SigninTabSel extends Component {
           />
         </div>
 
+
         <div id="Doctor" className="tabcontent">
           <h3>Sign in as Doctor</h3>
           <SignInForm
@@ -73,6 +77,7 @@ class SigninTabSel extends Component {
           />
         </div>
 
+
         <div id="Admin" className="tabcontent">
           <h3>Sign in as Admin</h3>
           <SignInForm
@@ -81,6 +86,8 @@ class SigninTabSel extends Component {
             setIsSignedIn={this.props.setIsSignedIn}
           />
         </div>
+
+
       </div>
     );
   }

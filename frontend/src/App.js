@@ -32,7 +32,6 @@ class App extends Component {
     sessionStorage.setItem("user", JSON.stringify(user));
     sessionStorage.setItem("userType", userType);
     // console.log(sessionStorage.getItem("user"));
-
     this.setState({ userClass: userType, userDetails: user })
   }
 

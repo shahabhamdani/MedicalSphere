@@ -14,6 +14,8 @@ export default class BlogCrud extends Component {
       isEdit: false,
       id: null,
     };
+
+    
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleCreateBlog = this.handleCreateBlog.bind(this);
     this.handleUpdateBlog = this.handleUpdateBlog.bind(this);

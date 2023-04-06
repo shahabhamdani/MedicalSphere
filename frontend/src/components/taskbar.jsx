@@ -21,31 +21,7 @@ class Taskbar extends Component {
     document.getElementById("3").classList.toggle("threeC");
   };
 
-  searchfilter = () => {
-    let url;
-    if (
-      this.props.user === "patient" ||
-      this.props.tabHead === "Valid Doctors"
-    ) {
-      url = "patient/searchDoc";
-    } else if (
-      this.props.user === "admin" &&
-      this.props.tabHead === "Registered Doctors"
-    ) {
-      url = "admin/searchDoc";
-    } else if (this.props.tabHead === "All Doctors") {
-      console.log("here");
-      url = "admin/searchInAllDocs";
-    }
-    fetch(
-      `http://localhost:3001/${url}?location=${this.state.DocLoc}&specialization=${this.state.DocSpl}`
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        // console.log(res);
-        this.props.handleFilter(res);
-      });
-  };
+
 
   handleBtn1Click = () => {
     if (this.props.user === "admin") {
@@ -121,6 +97,10 @@ class Taskbar extends Component {
       <button id="blogs" onClick={this.handleBlogs}>
           Bologs
         </button>);
+
+
+
+
     } else if (this.props.user === "doctor") {
       btn1 = "New Appointments";
       btn2 = "Accepted Appointments";
@@ -134,13 +114,16 @@ class Taskbar extends Component {
 
     return (
       <div className="taskBarDiv">
+       
         <div className="hamburger" onClick={this.expandTaksbar}>
           <span id="1"></span>
           <span id="2"></span>
           <span id="3"></span>
         </div>
+
+
+
         <div className="taskbar taskbarDisp">
-          {/* {btn3} */}
           <button id={btn1} onClick={this.handleBtn1Click}>
             {btn1}
           </button>
@@ -154,7 +137,6 @@ class Taskbar extends Component {
           {btn4}
           {btn5}
           {btn6}
-
 
         </div>
       </div>
