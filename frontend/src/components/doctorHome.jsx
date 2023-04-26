@@ -169,6 +169,7 @@ class DoctorHome extends Component {
             this.setState({
               tableHeading: heading,
               emptyListMsg: "You have not confirmed any appointments yet...",
+              tableData:[]
             });
           } else if (res.length && this._isMounted) {
             this.setState({
@@ -372,7 +373,7 @@ class DoctorHome extends Component {
                 <div class="col-md-3">
                   <div class="card-counter info">
                     <i class="fa fa-users"></i>
-                    <span class="count-numbers">0</span>
+                    <span class="count-numbers">{this.state.metrics.FEEDBACK}</span>
                     <span class="count-name">Total Feedbacks</span>
                   </div>
                 </div>

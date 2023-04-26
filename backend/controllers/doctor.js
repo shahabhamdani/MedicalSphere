@@ -113,13 +113,16 @@ const handleGetDoctorMetrics = (req, res, db) => {
     db.select(
       db.raw(`(SELECT COUNT(*) FROM appointments WHERE DOC_ID = '${doctor_ID}') AS APPOINTMENTS`),
       db.raw(`(SELECT COUNT(*) FROM confirmedappointments WHERE DOC_ID = '${doctor_ID}') AS CONFIRMED_APPOINTMENTS`),
-      db.raw(`(SELECT COUNT(*) FROM history WHERE DOC_ID = '${doctor_ID}') AS HISTORY`)
+      db.raw(`(SELECT COUNT(*) FROM history WHERE DOC_ID = '${doctor_ID}') AS HISTORY`),
+      db.raw(`(SELECT COUNT(*) FROM feedback WHERE DOC_ID = '${doctor_ID}') AS FEEDBACK`)
+
     )
     .then(result => {
       const payload = {
         APPOINTMENTS: result[0].APPOINTMENTS,
         CONFIRMED_APPOINTMENTS: result[0].CONFIRMED_APPOINTMENTS,
         HISTORY: result[0].HISTORY,
+        FEEDBACK: result[0].FEEDBACK,
       };
       res.json(payload);
     })

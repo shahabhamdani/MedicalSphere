@@ -86,7 +86,10 @@ app.post('/patient/bookAppointment', (req, res) => patient.handleBookAppointment
 app.get('/patient/getAppointments/:id', (req, res) => patient.handleGetAppointments(req, res, db));
 app.get('/patient/getPrescriptions/:id', (req, res) => patient.handleGetPrescriptions(req, res, db));
 app.post('/patient/sendFeedback', (req, res) => patient.handleSendFeedback(req, res, db));
-app.get('/patient/getFeedback', (req, res) => patient.handleGetFeedback(req, res, db));
+app.get('/patient/getFeedback/:id', (req, res) => patient.handleGetFeedback(req, res, db));
+app.delete('/patient/deleteFeedback', (req, res) => patient.handleDeleteFeedback(req, res, db));
+
+
 app.get('/patient/getPatientMatrics/:pat_id', (req, res) => patient.handleGetPatientMetrics(req, res, db));
 app.get('/patient/avlTime', (req, res) => patient.handleAvailableTimeSlot(req, res, db));
 app.get('/patient/getFeedBackDocList/:pat_id', (req, res) => patient.handleGetFeedBackDocList(req, res, db));

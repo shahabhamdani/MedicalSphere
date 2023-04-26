@@ -13,9 +13,9 @@ export default class BlogCrud extends Component {
       time: "",
       isEdit: false,
       id: null,
+      imgValid: "",
     };
 
-    
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleCreateBlog = this.handleCreateBlog.bind(this);
     this.handleUpdateBlog = this.handleUpdateBlog.bind(this);
@@ -27,13 +27,23 @@ export default class BlogCrud extends Component {
 
   handleImageChange = (event) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
+    const fileSize = file.size / 1024 / 1024; // in MB
 
-    reader.onload = (event) => {
-      this.setState({ image: event.target.result });
-    };
+    if (fileSize > 5) {
+      // maximum file size of 5 MB
+      alert("File size must be less than 5 MB");
+      event.target.value = null; // reset the file input field
+    } else {
+      // proceed with uploading the file
 
-    reader.readAsDataURL(file);
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        this.setState({ image: event.target.result });
+      };
+
+      reader.readAsDataURL(file);
+    }
   };
 
   componentDidMount() {
@@ -54,6 +64,7 @@ export default class BlogCrud extends Component {
   handleCreateBlog(event) {
     event.preventDefault();
 
+    if(this.state.image){
     const data = {
       title: this.state.title,
       text: this.state.text,
@@ -80,10 +91,18 @@ export default class BlogCrud extends Component {
           time: "",
         });
       });
+    }
+
+    else{
+      alert("Please attach the Image")
+    }
   }
 
   handleUpdateBlog(event) {
     event.preventDefault();
+
+    if(this.state.image){
+
     const data = {
       title: this.state.title,
       text: this.state.text,
@@ -124,6 +143,12 @@ export default class BlogCrud extends Component {
         });
       }
     });
+
+  }
+
+  else{
+    alert("Please attach Image")
+  }
   }
 
   handleDeleteBlog(id) {
@@ -194,14 +219,17 @@ export default class BlogCrud extends Component {
             ></textarea>
           </div>
           <div className="form-group">
-            <label htmlFor="image">Image:</label>
+            <label htmlFor="image">Image:<em Style={"color:red;"}>*</em></label>
             <input
               type="file"
               className="form-control"
               id="image"
               name="image"
+              accept=".jpg,.jpeg,.png"
               onChange={this.handleImageChange}
             />
+                          <div className="invalid-feedback">Please enter a valid value.</div>
+
           </div>
           <div className="form-group">
             <label htmlFor="date">Date:</label>
@@ -224,6 +252,8 @@ export default class BlogCrud extends Component {
               value={this.state.time}
               onChange={this.handleInputChange}
             />
+
+
           </div>
 
           <div className="form-group">
@@ -249,23 +279,18 @@ export default class BlogCrud extends Component {
                 <div className="card-body">
                   <div className="row">
                     <div className="col-3">
-                    
-                  <img className="bmImage" src={blog.image} alt=""></img>
-
-
+                      <img className="bmImage" src={blog.image} alt=""></img>
                     </div>
                     <div className="col-9" Style={"    text-align: initial;"}>
-                    <h5 className="card-title bmTitle">{blog.title}</h5>
-                  <p className="card-text bmText">{blog.text}</p>
-                  <p className="card-text">
-                    <small className="text-muted">
-                      {blog.date} at {blog.time}
-                    </small>
-                  </p>
+                      <h5 className="card-title bmTitle">{blog.title}</h5>
+                      <p className="card-text bmText">{blog.text}</p>
+                      <p className="card-text">
+                        <small className="text-muted">
+                          {blog.date} at {blog.time}
+                        </small>
+                      </p>
                     </div>
                   </div>
-
-                  
 
                   <div className="bmBts">
                     <button

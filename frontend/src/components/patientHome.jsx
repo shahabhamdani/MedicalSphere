@@ -7,7 +7,9 @@ import "./patientHome.css";
 import BookModal from "./bookModal";
 
 
+
 class PatientHome extends Component {
+
 
 
   state = {
@@ -21,7 +23,25 @@ class PatientHome extends Component {
     tableHeading: "Available Doctors",
     emptyListMsg: "",
     metrics: [],
+    feedbackList: [],
+
   };
+
+  
+  handleGetFeedback(){
+    let patient = this.props.patient;
+
+
+    fetch(`http://localhost:3001/patient/getFeedback/${patient.PATIENT_ID}`)
+    .then((res) => res.json())
+    .then((res) => {
+      if (res !== "NO")
+        this.setState({
+          feedbackList: res,
+        });
+    });
+  
+  }
 
 
   _isMounted = false;
@@ -35,7 +55,11 @@ class PatientHome extends Component {
     //   .then((res) => res.json())
     //   .then((res) => { console.log(  res)});
 
+
+    this.handleGetFeedback();
+
     let patient = this.props.patient;
+
     fetch(
       `http://localhost:3001/patient/getPatientMatrics/${patient.PATIENT_ID}`
     )
@@ -199,10 +223,40 @@ class PatientHome extends Component {
               tableData: res,
               appointments: res,
               emptyListMsg: "",
+              feedBackDocList:res
             });
         });
     }
   };
+
+
+  handleDeleteFeedback = (doc_id, sl_no) => {
+    const data = {
+      doc_id: doc_id,
+      sl_no: sl_no,
+    };
+
+    fetch("http://localhost:3001/patient/deleteFeedback", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        if (response === "SUCCESSFUL") {
+          this.handleGetFeedback()
+
+          this.setState({
+            feedBackDocList:[]
+          });
+
+          this.getFeedbackDocList("Give Feedback")
+          
+        }
+      });
+  }
 
   handleGiveFeedback = (i, d_id, r) => {
     // console.log("Feedback Sent :", r);
@@ -220,11 +274,16 @@ class PatientHome extends Component {
       .then((res) => {
         if (res === "SUCCESSFUL") {
           let feedBackList = [...this.state.feedBackDocList];
+    
           feedBackList.splice(i, 1);
           this.setState({
             feedBackDocList: feedBackList,
             tableData: feedBackList,
           });
+
+          this.handleGetFeedback();
+
+
         }
       });
   };
@@ -327,6 +386,9 @@ class PatientHome extends Component {
                       user={this.props.user}
                       tableHead={this.state.tableHeading}
                       handleGiveFeedback={this.handleGiveFeedback}
+                      patient={this.props.patient}
+                      feedbackList={this.state.feedbackList}
+                      handleDeleteFeedback={this.handleDeleteFeedback}
                     />
                     <p>{this.state.emptyListMsg}</p>
                   </div>

@@ -81,7 +81,7 @@ class PrescriptionModal extends Component {
           this.props.handleTreated(this.state.appointmentInfo);
 
           this.props.hideMdl();
-          alert("You appointment has been booked successfully!\nThank you");
+          alert("Patient has been successfully prescribed!\nThank you");
         } else {
           alert("Sorry, Somthing didn't work...");
         }

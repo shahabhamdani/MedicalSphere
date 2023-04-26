@@ -11,6 +11,10 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
+
+
+
+
     fetch("http://localhost:3001/blogs")
       .then((response) => response.json())
       .then((data) => {

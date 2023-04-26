@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DataTablePatient from "./DataTablePatient";
 import "./patientHomeTable.css";
 import Pharmacy from "./Pharmacy";
+import PatientFeedback from "./patientFeedback";
 
 
 
@@ -45,7 +46,7 @@ class PatHomeTable extends Component {
 
     else if (this.props.tableHead === "Pharmacy") {
       tableHead = ""
-      tableContent = (<Pharmacy/>)
+      tableContent = <div><Pharmacy/></div>
     } 
 
     
@@ -71,42 +72,49 @@ class PatHomeTable extends Component {
         </tr>
       ));
     } else if (this.props.tableHead === "Give Feedback") {
-      tableHead = (
-        <tr>
-          <th>SL. NO.</th>
-          <th>FEEDBACK</th>
-        </tr>
-      );
-      tableContent = this.props.data.map((d, i) => (
-        <tr key={i}>
-          <td>{i + 1}</td>
-          <td>
-            <div className="feedbackCard confirm">
-              {d.NAME.toUpperCase()} &nbsp;&nbsp;&nbsp;{" "}
-              {d.SPECIALIZATION.toUpperCase()}
-              <br />
-              <textarea id="remark" rows="3"></textarea>
-              <br />
-              <div style={{ textAlign: "right" }}>
-                <button
-                  style={{
-                    textAlign: "center",
-                    padding: "0.4em",
-                    width: "18ex",
-                  }}
-                  id={"feedback_" + d.DOC_ID}
-                  onClick={() => {
-                    let remark = document.getElementById("remark").value;
-                    this.props.handleGiveFeedback(i, d.DOC_ID, remark);
-                  }}
-                >
-                  Submit Feedback
-                </button>
-              </div>
-            </div>
-          </td>
-        </tr>
-      ));
+
+      tableContent = (<PatientFeedback data ={this.props.data} patient={this.props.patient} handleDeleteFeedback={this.props.handleDeleteFeedback} feedbackList={this.props.feedbackList}  handleGiveFeedback={this.props.handleGiveFeedback} />)
+
+
+
+      // tableHead = (
+      //   <tr>
+      //     <th>SL. NO.</th>
+      //     <th>FEEDBACK</th>
+      //   </tr>
+      // );
+
+
+      // tableContent = this.props.data.map((d, i) => (
+      //   <tr key={i}>
+      //     <td>{i + 1}</td>
+      //     <td>
+      //       <div className="feedbackCard confirm">
+      //         {d.NAME.toUpperCase()} &nbsp;&nbsp;&nbsp;{" "}
+      //         {d.SPECIALIZATION.toUpperCase()}
+      //         <br />
+      //         <textarea id="remark" rows="3"></textarea>
+      //         <br />
+      //         <div style={{ textAlign: "right" }}>
+      //           <button
+      //             style={{
+      //               textAlign: "center",
+      //               padding: "0.4em",
+      //               width: "18ex",
+      //             }}
+      //             id={"feedback_" + d.DOC_ID}
+      //             onClick={() => {
+      //               let remark = document.getElementById("remark").value;
+      //               this.props.handleGiveFeedback(i, d.DOC_ID, remark);
+      //             }}
+      //           >
+      //             Submit Feedback
+      //           </button>
+      //         </div>
+      //       </div>
+      //     </td>
+      //   </tr>
+      // ));
     }
     return (
       <div>
