@@ -2,26 +2,132 @@ import React, { Component } from "react";
 import "./homePage.css";
 import { Link } from "react-router-dom";
 
+import GaugeChart from 'react-gauge-chart';
+
+
 class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       blogs: [],
+      gender: 0,
+      age: 0,
+      smoking: 0,
+      yellowFingers: 0,
+      anxiety: 0,
+      peerPressure: 0,
+      chronicDisease: 0,
+      fatigue: 0,
+      allergy: 0,
+      wheezing: 0,
+      alcoholConsuming: 0,
+      coughing: 0,
+      shortnessOfBreath: 0,
+      swallowingDifficulty: 0,
+      chestPain: 0,
+      percentage: 0,
     };
   }
 
+
+  
+
+  handleChange = (event) => {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const data = {
+      gender: this.state.gender,
+      age: this.state.age,
+      smoking: this.state.smoking,
+      yellowFingers: this.state.yellowFingers,
+      anxiety: this.state.anxiety,
+      peerPressure: this.state.peerPressure,
+      chronicDisease: this.state.chronicDisease,
+      fatigue: this.state.fatigue,
+      allergy: this.state.allergy,
+      wheezing: this.state.wheezing,
+      alcoholConsuming: this.state.alcoholConsuming,
+      coughing: this.state.coughing,
+      shortnessOfBreath: this.state.shortnessOfBreath,
+      swallowingDifficulty: this.state.swallowingDifficulty,
+      chestPain: this.state.chestPain,
+    };
+
+
+    console.log(data)
+
+    fetch("http://localhost:3001/lung-cancer-prediction/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) =>{
+        this.setState({ percentage: Math.ceil(data) });
+
+      } )
+      .catch((error) => console.error(error));
+  };
+
   componentDidMount() {
-
-
-
-
     fetch("http://localhost:3001/blogs")
       .then((response) => response.json())
       .then((data) => {
         this.setState({ blogs: data });
       });
   }
+
+  
   render() {
+
+      let color = '';
+      let label = '';
+    if(this.state.percentage == 0){
+      color =  'grey'
+      label = '';
+    } else
+      if (this.state.percentage < 20) {
+        color = 'darkgreen';
+        label = this.state.percentage+'% Very low';
+      } else if (this.state.percentage < 40) {
+        color = 'green';
+        label = this.state.percentage+'% Low';
+      } else if (this.state.percentage < 60) {
+        color = 'yellow';
+        label = this.state.percentage+'% Moderate';
+      } else if (this.state.percentage < 80) {
+        color = 'orange';
+        label = this.state.percentage+'% High';
+      } else  {
+        color = 'red';
+        label = this.state.percentage+'% Very high';
+      } 
+    
+      console.log(this.state.percentage)
+      const gaugeOptions = {
+        percent: this.state.percentage/100,
+        colors: [color],
+        arcPadding: 0.02,
+        cornerRadius: 50,
+        nrOfLevels: 5,
+        needleColor: '#333',
+        needleBaseColor: '#333',
+        hideText: true,
+      };
+
+      
     return (
       <div>
         <div className="hero-section">
@@ -44,54 +150,224 @@ class HomePage extends Component {
           <table>
             <tr>
               <td>
-                <div class="form">
-                  <h4 Style={"margin-bottom:15px"}>Please enter your</h4>
+
+              <form Style={null} onSubmit={this.handleSubmit}>
+
+                <div className="form" >
+                  <h4 style={{ marginBottom: "15px" }}>Please enter your</h4>
                   <h1>Symptoms</h1>
-                  <input
-                    type="text"
-                    name="s1"
-                    id="fname"
-                    placeholder="Symptom 1"
-                    maxlength="60"
-                    required
-                  />
-                  <input
-                    type="email"
-                    name="s2"
-                    id="email"
-                    placeholder="Symptom 2"
-                    maxlength="100"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="s3"
-                    id="s3"
-                    placeholder="Symptom 3"
-                    required
-                  />
-                  {/* <select name="service">
-                    <option value="emergencyservice">Emergency Service</option>
-                    <option value="certifiedservice">Certified Service</option>
-                  </select> */}
-                  <button type="submit" class="btn2">
-                    GET PRESCRIPTION
-                  </button>
+                  <label>
+                    Gender:
+                    <select
+                      name="gender"
+                      value={this.state.gender}
+                      onChange={this.handleChange}
+                      required
+                    >
+                      <option value="">Select Gender</option>
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>
+                    </select>
+                  </label>
+                  <label>
+                    Age:
+                    <input
+                      type="number"
+                      name="age"
+                      value={this.state.age}
+                      onChange={this.handleChange}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Smoking:
+                    <select
+                      name="smoking"
+                      value={this.state.smoking}
+                      onChange={this.handleChange}
+                      required
+                    >
+                      <option value="">Select Option</option>
+                      <option value="1">No</option>
+                      <option value="2">Yes</option>
+                    </select>
+                  </label>
+                  <label>
+                    Yellow Fingers:
+                    <select
+                      name="yellowFingers"
+                      value={this.state.yellowFingers}
+                      onChange={this.handleChange}
+                      required
+                    >
+                      <option value="">Select Option</option>
+                      <option value="1">No</option>
+                      <option value="2">Yes</option>
+                    </select>
+                  </label>
+                  <label>
+                    Anxiety:
+                    <select
+                      name="anxiety"
+                      value={this.state.anxiety}
+                      onChange={this.handleChange}
+                      required
+                    >
+                      <option value="">Select Option</option>
+                      <option value="1">No</option>
+                      <option value="2">Yes</option>
+                    </select>
+                  </label>
+                  <label>
+                    Peer Pressure:
+                    <select
+                      name="peerPressure"
+                      value={this.state.peerPressure}
+                      onChange={this.handleChange}
+                      required
+                    >
+                      <option value="">Select Option</option>
+                      <option value="1">No</option>
+                      <option value="2">Yes</option>
+                    </select>
+                  </label>
+                  <label>
+                    Chronic Disease:
+                    <select
+                      name="chronicDisease"
+                      value={this.state.chronicDisease}
+                      onChange={this.handleChange}
+                      required
+                    >
+                      <option value="">Select Option</option>
+                      <option value="1">No</option>
+                      <option value="2">Yes</option>
+                    </select>
+                  </label>
+                  <label>
+                    Fatigue:
+                    <select
+                      name="fatigue"
+                      value={this.state.fatigue}
+                      onChange={this.handleChange}
+                      required
+                    >
+                      <option value="">Select Option</option>
+                      <option value="1">No</option>
+                      <option value="2">Yes</option>
+                    </select>
+                  </label>
+                  <label>
+                    Allergy:
+                    <select
+                      name="allergy"
+                      value={this.state.allergy}
+                      onChange={this.handleChange}
+                      required
+                    >
+                      <option value="">Select Option</option>
+                      <option value="1">No</option>
+                      <option value="2">Yes</option>
+                    </select>
+                  </label>
+                  <label>
+                    Wheezing:
+                    <select
+                      name="wheezing"
+                      value={this.state.wheezing}
+                      onChange={this.handleChange}
+                      required
+                    >
+                      <option value="">Select Option</option>
+                      <option value="1">No</option>
+                      <option value="2">Yes</option>
+                    </select>
+                  </label>
+                  <label>
+                    Alcohol Consuming:
+                    <select
+                      name="alcoholConsuming"
+                      value={this.state.alcoholConsuming}
+                      onChange={this.handleChange}
+                      required
+                    >
+                      <option value="">Select Option</option>
+                      <option value="1">No</option>
+                      <option value="2">Yes</option>
+                    </select>
+                  </label>
+                  <label>
+                    Coughing:
+                    <select
+                      name="coughing"
+                      value={this.state.coughing}
+                      onChange={this.handleChange}
+                      required
+                    >
+                      <option value="">Select Option</option>
+                      <option value="1">No</option>
+                      <option value="2">Yes</option>
+                    </select>
+                  </label>
+                  <label>
+                    Shortness Of Breath:
+                    <select
+                      name="shortnessOfBreath"
+                      value={this.state.shortnessOfBreath}
+                      onChange={this.handleChange}
+                      required
+                    >
+                      <option value="">Select Option</option>
+                      <option value="1">No</option>
+                      <option value="2">Yes</option>
+                    </select>
+                  </label>
+                  <label>
+                    Swallowing Difficulty:
+                    <select
+                      name="swallowingDifficulty"
+                      value={this.state.swallowingDifficulty}
+                      onChange={this.handleChange}
+                      required
+                    >
+                      <option value="">Select Option</option>
+                      <option value="1">No</option>
+                      <option value="2">Yes</option>
+                    </select>
+                  </label>
+                  <label>
+                    Chest Pain:
+                    <select
+                      name="chestPain"
+                      value={this.state.chestPain}
+                      onChange={this.handleChange}
+                      required
+                    >
+                      <option value="">Select Option</option>
+                      <option value="1">No</option>
+                      <option value="2">Yes</option>
+                    </select>
+                  </label>
+                  <br></br>
+<label>
+<button className="btn-primary" type="submit">Submit</button>
+</label>
+
+<br></br>
+
+<label>
+<div>
+      <GaugeChart id="gauge-chart1" {...gaugeOptions} />
+      <p style={{ color }}>{label}</p>
+    </div>
+</label>
+                 
+
                 </div>
+                </form>
+
               </td>
-              <td>
-                <em>Get Prescription</em>
-                <h1>Get Prescription based on your symptoms</h1>
-                <p>
-                  An AI based system which provides you with the medical
-                  prescription based on your symptoms by using the NLP natural
-                  language processing
-                </p>
-                <p>
-                  MEDICAL SPHERE will give you goosebumps with its AI
-                  Prescribtion.{" "}
-                </p>
-              </td>
+              
             </tr>
           </table>
         </section>
@@ -159,9 +435,7 @@ class HomePage extends Component {
           </div>
           <div class="content">
             <h1>We are well experienced doctors</h1>
-            <p>
-              {" "}
-            </p>
+            <p> </p>
           </div>
         </section>
 
@@ -190,16 +464,12 @@ class HomePage extends Component {
                           </div>
 
                           <div class="post-text">
-                           
-                        
-                          <p>{blog.text}</p>
+                            <p>{blog.text}</p>
 
                             {/* <div
                               style={{ maxHeight: "6em", overflow: "hidden" }}>
                               <p>{blog.text}</p>
                             </div> */}
-
-
                           </div>
                         </div>
                       </div>
