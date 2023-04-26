@@ -13,6 +13,9 @@ app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
+app.use(express.json());
+
+
 
 // Links to all the required route handlers
 const register = require('./controllers/register');
@@ -20,7 +23,8 @@ const login = require('./controllers/login');
 const admin = require('./controllers/admin');
 const patient = require('./controllers/patient');
 const doctor = require('./controllers/doctor')
-const inventory = require('./controllers/inventory')
+const inventory = require('./controllers/inventory');
+const riskPrediction = require('./controllers/riskPrediction');
 
 
 
@@ -109,6 +113,11 @@ app.get('/doctor/getConfAppointments/:doc_id', (req, res) => doctor.getConfirmed
 app.post('/doctor/treated', (req, res) => doctor.handleTreated(req, res, db));
 app.delete('/doctor/missedAppointment', (req, res) => doctor.handleMissed(req, res, db));
 app.get('/doctor/getHistory/:d_id', (req, res) => doctor.handleGetHistory(req, res, db));
+
+ 
+
+//Routs to Handle Future Risk Prediction 
+app.post('/lung-cancer-prediction', (req, res) => riskPrediction.handleRiskPrediction(req, res));
 
 
 const PORT = process.env.PORT || 3001;
