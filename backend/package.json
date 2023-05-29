@@ -1,25 +1,25 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "knex": "^0.20.11",
-    "mysql": "^2.18.1",
-    "streamifier": "^0.1.1",
-    "@tensorflow/tfjs": "^4.4.0",
-    "@tensorflow/tfjs-backend-cpu": "^4.4.0",
-    "body-parser": "^1.20.2",
-    "csv-parser": "^3.0.0",
-    "node-fetch": "^3.3.1",
-    "node-gyp": "^9.3.1"
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "cors": "^2.8.5",
+      "express": "^4.17.1",
+      "knex": "^0.20.11",
+      "mysql": "^2.18.1",
+      "streamifier": "^0.1.1",
+      "@tensorflow/tfjs-node": "^4.6.0",
+      "body-parser": "^1.20.2",
+      "csv-parser": "^3.0.0",
+      "node-fetch": "^3.3.1",
+      "node-gyp": "^9.3.1"
+    }
   }
-}
+  

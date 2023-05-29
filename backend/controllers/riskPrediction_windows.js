@@ -1,6 +1,8 @@
 const csv = require("csv-parser");
 const fs = require("fs");
-const tf = require("@tensorflow/tfjs-node");
+const tf = require("@tensorflow/tfjs");
+require("@tensorflow/tfjs-backend-cpu");
+
 
 async function normalize(data) {
   const normalizedData = await data.map((item) => {
@@ -28,14 +30,17 @@ async function normalize(data) {
   return normalizedData;
 }
 
+
+
 let normalizedLungCancerData = null;
 let inputTensor = [];
 let model = null;
 let ys = null;
 let xs = null;
 
+
+
 async function trainModel() {
-  const lungCancerData = [];
 
   fs.createReadStream("lung_cancer.csv")
     .pipe(csv())
@@ -90,10 +95,17 @@ async function trainModel() {
         // Train the model
         console.log("Waiting for model to be trained . . .");
         await model.fit(xs, ys, { epochs: 500 });
-        console.log("Model Trained");
+        console.log("Mode Trained");
       }
     });
 }
+
+
+
+trainModel();
+
+
+
 
 async function trainAndPredict(userdata, res) {
   console.log(userdata);
@@ -106,9 +118,21 @@ async function trainAndPredict(userdata, res) {
   res.send(percentage);
 }
 
+// Load the lung cancer dataset
+const lungCancerData = [];
+
+
+
+// Make a prediction using the loaded model
+
 async function predict(data, res) {
-  trainAndPredict(data, res);
+
+  trainAndPredict( data, res);
+
 }
+
+
+
 
 const handleRiskPrediction = async (req, res) => {
   const {
@@ -147,11 +171,14 @@ const handleRiskPrediction = async (req, res) => {
     swallowingDifficulty === "2" ? 1 : 0,
     chestPain === "2" ? 1 : 0,
   ];
+  // Make a prediction using the loaded model and the user inpu
+
+  // const model = await loadModel();
 
   const prediction = await predict(userInput, res);
-};
 
-trainModel();
+
+};
 
 module.exports = {
   handleRiskPrediction: handleRiskPrediction,
