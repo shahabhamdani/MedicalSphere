@@ -14,7 +14,6 @@ class blog extends Component {
       time: "",
     };
   }
-
   
   componentDidMount() {
     fetch(`http://localhost:3001/blogs/${this.props.params.id}`)
