@@ -171,7 +171,7 @@ display:none;
 
 .hero-section{
 height:80vh;
-background-image:url("https://i.ibb.co/Pmy0dmn/bg.png");
+background-image:url("./photos/bg.png");
 background-size:cover;
 
 }
@@ -234,6 +234,7 @@ width:100%;
 margin:auto;
 position:relative;
 top:-10vh;
+
 }
 
 .section1 .form h4{

@@ -32,10 +32,10 @@ const riskPrediction = require('./controllers/riskPrediction');
 var db = knex({
     client: 'mysql',
     connection: {
-        host: '127.0.0.1',
-        user: 'root',
-        password: '',
-        database: 'medicalSphere'
+        host: 'sql12.freesqldatabase.com',
+        user: 'sql12622078',
+        password: 'RTanXy6fTr',
+        database: 'sql12622078'
     }
 })
 

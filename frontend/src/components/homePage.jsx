@@ -151,10 +151,10 @@ class HomePage extends Component {
             <tr>
               <td>
 
-              <form Style={null} onSubmit={this.handleSubmit}>
+              <form style={{  backgroundColor: "white" }} onSubmit={this.handleSubmit}>
 
                 <div className="form" >
-                  <h4 style={{ marginBottom: "15px" }}>Please enter your</h4>
+                  <h4 style={{ marginBottom: "15px"}}>Please enter your</h4>
                   <h1>Symptoms</h1>
                   <label>
                     Gender:

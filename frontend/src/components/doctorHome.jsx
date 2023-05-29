@@ -5,8 +5,6 @@ import DocHomeTable from "./docHomeTable";
 import PrescriptionModal from "./prescriptionModal";
 
 class DoctorHome extends Component {
-
-
   state = {
     appList: [],
     confApp: [],
@@ -20,34 +18,19 @@ class DoctorHome extends Component {
     metrics: [],
   };
 
-
   _isMounted = false;
 
-
-
-
-
-
-
-
-
-
-
   componentDidMount() {
-
-
     let doctor = this.props.doctor;
 
     fetch(`http://localhost:3001/doctor/getDoctorMetrics/${doctor.DOC_ID}`)
-      
-    .then((res) => res.json())
+      .then((res) => res.json())
       .then((res) => {
         if (res !== "NO")
-        this.setState({
+          this.setState({
             metrics: res,
-          });        
+          });
       });
-
 
     this._isMounted = true;
 
@@ -75,10 +58,6 @@ class DoctorHome extends Component {
     }
   }
 
-
-
-
-
   handleConfirmApp = (a, i) => {
     let load = {
       method: "POST",
@@ -90,7 +69,6 @@ class DoctorHome extends Component {
         time_slot: a.TIME,
       }),
     };
-
 
     // console.log(load);
     fetch("http://localhost:3001/doctor/confirmAppointment", load)
@@ -133,13 +111,9 @@ class DoctorHome extends Component {
       });
   };
 
-
-
   setAppPatInfo = (pat) => {
     this.setState({ appPatInfo: pat, dispPresMdl: true });
   };
-
-
 
   hideModal = () => {
     this.setState({ dispPresMdl: false });
@@ -169,7 +143,7 @@ class DoctorHome extends Component {
             this.setState({
               tableHeading: heading,
               emptyListMsg: "You have not confirmed any appointments yet...",
-              tableData:[]
+              tableData: [],
             });
           } else if (res.length && this._isMounted) {
             this.setState({
@@ -293,12 +267,8 @@ class DoctorHome extends Component {
     this._isMounted = false;
   }
 
-  
   render() {
-
-
     let prescriptionModal = null;
-
 
     if (this.state.dispPresMdl) {
       prescriptionModal = (
@@ -335,7 +305,6 @@ class DoctorHome extends Component {
                 getConfirmedApp={this.getConfirmedApp}
                 getHistory={this.getHistory}
                 getFeedBack={this.getFeedBack}
-                
               />
             </div>
             <div className="container">
@@ -364,8 +333,8 @@ class DoctorHome extends Component {
                   <div class="card-counter success">
                     <i class="fa fa-database"></i>
                     <span class="count-numbers">
-                    {this.state.metrics.HISTORY}
-</span>
+                      {this.state.metrics.HISTORY}
+                    </span>
                     <span class="count-name">Patients Treated</span>
                   </div>
                 </div>
@@ -373,15 +342,16 @@ class DoctorHome extends Component {
                 <div class="col-md-3">
                   <div class="card-counter info">
                     <i class="fa fa-users"></i>
-                    <span class="count-numbers">{this.state.metrics.FEEDBACK}</span>
+                    <span class="count-numbers">
+                      {this.state.metrics.FEEDBACK}
+                    </span>
                     <span class="count-name">Total Feedbacks</span>
                   </div>
                 </div>
               </div>
 
               <h1 id="heading">{this.state.tableHeading}</h1>
-              
-              
+
               <DocHomeTable
                 user={this.props.user}
                 tableHeading={this.state.tableHeading}
@@ -392,7 +362,6 @@ class DoctorHome extends Component {
                 handleTreated={this.handleTreated}
                 handleDinCome={this.handleDinCome}
               />
-
 
               <p>{this.state.emptyListMsg}</p>
             </div>

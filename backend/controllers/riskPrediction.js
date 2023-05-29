@@ -3,6 +3,7 @@ const fs = require("fs");
 const tf = require("@tensorflow/tfjs");
 require("@tensorflow/tfjs-backend-cpu");
 
+
 async function normalize(data) {
   const normalizedData = await data.map((item) => {
     const normalizedItem = {
@@ -29,13 +30,18 @@ async function normalize(data) {
   return normalizedData;
 }
 
+
+
 let normalizedLungCancerData = null;
 let inputTensor = [];
 let model = null;
 let ys = null;
 let xs = null;
 
+
+
 async function trainModel() {
+
   fs.createReadStream("lung_cancer.csv")
     .pipe(csv())
     .on("data", (row) => {
@@ -51,7 +57,7 @@ async function trainModel() {
       if (normalizedLungCancerData) {
         xs = tf.tensor2d(
           normalizedLungCancerData.map((item) => [
-            item.GENDER === 1 ? 1 : 0,
+            item.GENDER === "M" ? 1 : 0,
             item.AGE,
             item.SMOKING === 2 ? 1 : 0,
             item.YELLOW_FINGERS === 2 ? 1 : 0,
@@ -94,9 +100,14 @@ async function trainModel() {
     });
 }
 
+
+
 trainModel();
 
-async function trainAndPredict(data, userdata, res) {
+
+
+
+async function trainAndPredict(userdata, res) {
   console.log(userdata);
 
   inputTensor = tf.tensor2d(userdata, [1, userdata.length]);
@@ -110,10 +121,18 @@ async function trainAndPredict(data, userdata, res) {
 // Load the lung cancer dataset
 const lungCancerData = [];
 
+
+
 // Make a prediction using the loaded model
+
 async function predict(data, res) {
-  trainAndPredict(normalizedLungCancerData, data, res);
+
+  trainAndPredict( data, res);
+
 }
+
+
+
 
 const handleRiskPrediction = async (req, res) => {
   const {
@@ -157,6 +176,8 @@ const handleRiskPrediction = async (req, res) => {
   // const model = await loadModel();
 
   const prediction = await predict(userInput, res);
+
+
 };
 
 module.exports = {
