@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2023 at 08:17 PM
+-- Generation Time: May 29, 2023 at 02:46 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -61,22 +61,7 @@ CREATE TABLE `alldoctors` (
 --
 
 INSERT INTO `alldoctors` (`DOC_ID`, `NAME`, `EMAIL`, `PHONE_NUMBER`, `REGNO`, `SPECIALIZATION`, `LOCATION`) VALUES
-(86, 'abcd', 'abcd@gmail.com', 82365, 'reg121', 'abcd_spl', 'abcd_loc'),
-(87, 'bcd', 'bcd@gmail.com', 34975347, 'reg12121', 'bcd_spl', 'bcd_loc'),
-(0, 'doc13', 'doc13@gmail.com', 123454, 'dreg13', 'spl13', 'dloc13'),
-(0, 'doc14', 'doc14@gmail.com', 123454, 'dreg14', 'spl14', 'dloc14'),
-(0, 'doc15', 'doc15@gmail.com', 123454, 'dreg15', 'spl15', 'dloc15'),
-(34, 'doc16', 'doc16@gmail.com', 123454, 'dreg16', 'spl16', 'dloc16'),
-(36, 'doc17', 'doc17@gmail.com', 123454, 'dreg17', 'spl17', 'dloc17'),
-(55, 'doc18', 'doc18@gmail.com', 123454, 'dreg18', 'spl18', 'dloc18'),
-(0, 'doc19', 'doc19@gmail.com', 123454, 'dreg19', 'spl19', 'dloc19'),
 (1, 'doc1', 'doc1@gmail.com', 123453798, 'dreg1', 'spl1', 'dloc1'),
-(74, 'doc20', 'doc20@gmail.com', 123454, 'dreg20', 'spl20', 'dloc20'),
-(80, 'doc21', 'doc21@gmail.com', 123454, 'dreg21', 'spl21', 'dloc21'),
-(81, 'doc22', 'doc22@gmail.com', 123454, 'dreg22', 'spl22', 'dloc22'),
-(82, 'doc23', 'doc23@gmail.com', 2525534, 'dreg23', 'spl23', 'dloc23'),
-(0, 'doc24', 'doc24@gmail.com', 213423535, 'dreg24', 'spl24', 'dloc24'),
-(85, 'doc25', 'doc25@gmail.com', 765879346, 'dreg25', 'spl25', 'dloc25'),
 (2, 'doc2', 'doc2@gmail.com', 62354, 'dreg2', 'spl2', 'dloc2'),
 (3, 'doc3', 'doc3@gmail.com', 364587, 'dreg3', 'spl3', 'dloc3'),
 (4, 'doc4', 'doc4@gmail.com', 343, 'dreg4', 'spl4', 'dloc4'),
@@ -84,12 +69,7 @@ INSERT INTO `alldoctors` (`DOC_ID`, `NAME`, `EMAIL`, `PHONE_NUMBER`, `REGNO`, `S
 (6, 'doc6', 'doc6@gmail.com', 9423659, 'dreg6', 'spl6', 'dloc6'),
 (7, 'doc7', 'doc7@gmail.com', 86253, 'dreg7', 'spl7', 'dloc7'),
 (9, 'doc8', 'doc8@gmail.com', 23523, 'dreg8', 'spl8', 'dloc8'),
-(89, 'pqr', 'pqr@gmail.com', 347956497, 'reg135715', 'pqr_spl', 'pqr_loc'),
-(90, 'Shahab', 'shahabdoc@gmail.com', 3065949602, '9877', 'phd', 'USA'),
-(92, 'TEST1', 'test1@gmail.com', 3065949602, '9877', 'phd', 'USA'),
-(94, 'TEST22', 'test22@gmail.com', 3065949602, '9877', 'phd', 'USA'),
-(95, 'TestDoc', 'testdoc@gmail.com', 0, '000', 'Phd', 'USA'),
-(88, 'zyx', 'zyx@gmail.com', 384638, 'reg26826', 'zyx_spl', 'zyx_loc');
+(95, 'TestDoc', 'testdoc@gmail.com', 0, '000', 'Phd', 'USA');
 
 -- --------------------------------------------------------
 
@@ -105,13 +85,6 @@ CREATE TABLE `appointments` (
   `TIME` time NOT NULL,
   `DESCRIPTION` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `appointments`
---
-
-INSERT INTO `appointments` (`DOC_ID`, `PATIENT_ID`, `PATIENT_NAME`, `DATE`, `TIME`, `DESCRIPTION`) VALUES
-(1, 5, 'Shah', '2023-04-19', '15:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -133,8 +106,6 @@ CREATE TABLE `blogs` (
 --
 
 INSERT INTO `blogs` (`id`, `title`, `text`, `image`, `date`, `time`) VALUES
-(18, 'Taking care of your health is essential for a happy life', 'Taking care of your health is essential for a happy life. Eat a balanced diet, exercise regularly, get enough sleep, avoid smoking and excessive alcohol consumption, and prioritize mental health. Small changes can make a big difference in your overall well-being.', '1681825614712.png', '2023-04-05', '22:17'),
-(19, 'Taking care of your health is essential for a happy life', 'Taking care of your health is essential for a happy life. Eat a balanced diet, exercise regularly, get enough sleep, avoid smoking and excessive alcohol consumption, and prioritize mental health. Small changes can make a big difference in your overall well-being.\n\n', '1680715136626.png', '2023-04-05', '22:18'),
 (20, 'Taking care of your health is essential for a happy life', 'Taking care of your health is essential for a happy life. Eat a balanced diet, exercise regularly, get enough sleep, avoid smoking and excessive alcohol consumption, and prioritize mental health. Small changes can make a big difference in your overall well-being.Taking care of your health is essential for a happy life. Eat a balanced diet, exercise regularly, get enough sleep, avoid smoking and excessive alcohol consumption, and prioritize mental health. Small changes can make a big difference in your overall well-being.Taking care of your health is essential for a happy life. Eat a balanced diet, exercise regularly, get enough sleep, avoid smoking and excessive alcohol consumption, and prioritize mental health. Small changes can make a big difference in your overall well-being.', '1680715819624.png', '2023-04-05', '22:19');
 
 -- --------------------------------------------------------
@@ -153,13 +124,6 @@ CREATE TABLE `confirmedappointments` (
   `DESCRIPTION` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `confirmedappointments`
---
-
-INSERT INTO `confirmedappointments` (`DOC_ID`, `PATIENT_ID`, `PATIENT_NAME`, `PHONE_NUMBER`, `DATE`, `TIME`, `DESCRIPTION`) VALUES
-(2, 5, 'Shah', 2147483647, '2023-04-28', '12:00:00', '');
-
 -- --------------------------------------------------------
 
 --
@@ -177,36 +141,13 @@ CREATE TABLE `doctorcredentials` (
 --
 
 INSERT INTO `doctorcredentials` (`DOC_ID`, `EMAIL`, `PASSWORD`) VALUES
-(0, 'doc13@gmail.com', 'dpass13'),
 (1, 'doc1@gmail.com', 'dpass1'),
 (2, 'doc2@gmail.com', 'dpass2'),
 (3, 'doc3@gmail.com', 'dpass3'),
 (4, 'doc4@gmail.com', 'dpass4'),
 (5, 'doc5@gmail.com', 'dpass5'),
 (6, 'doc6@gmail.com', 'dpass6'),
-(7, 'doc7@gmail.com', 'dpass7'),
-(9, 'doc8@gmail.com', 'dpass8'),
-(32, 'doc14@gmail.com', 'dpass14'),
-(33, 'doc15@gmail.com', 'dpass15'),
-(34, 'doc16@gmail.com', 'dpass16'),
-(44, 'doc17@gmail.com', 'dpass17'),
-(55, 'doc18@gmail.com', 'dpass18'),
-(57, 'doc19@gmail.com', 'dpass19'),
-(74, 'doc20@gmail.com', 'dpass20'),
-(80, 'doc21@gmail.com', 'dpass21'),
-(81, 'doc22@gmail.com', 'dpass22'),
-(82, 'doc23@gmail.com', 'dpass23'),
-(83, 'doc24@gmail.com', 'dpass24'),
-(85, 'doc25@gmail.com', 'dpass24'),
-(86, 'abcd@gmail.com', 'abcdp'),
-(87, 'bcd@gmail.com', 'bcdp'),
-(88, 'zyx@gmail.com', 'zyxp'),
-(89, 'pqr@gmail.com', 'pqrp'),
-(90, 'shahabdoc@gmail.com', '123'),
-(91, 'testdoc@gmail.com', '123'),
-(92, 'test1@gmail.com', '123'),
-(93, 'test11@gmail.com', '123'),
-(94, 'test22@gmail.com', '123');
+(9, 'doc8@gmail.com', 'dpass8');
 
 -- --------------------------------------------------------
 
@@ -220,19 +161,6 @@ CREATE TABLE `feedback` (
   `PATIENT_ID` bigint(20) NOT NULL,
   `REMARK` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `feedback`
---
-
-INSERT INTO `feedback` (`SL_NO`, `DOC_ID`, `PATIENT_ID`, `REMARK`) VALUES
-(1, 1, 1, 'Great service!!!'),
-(2, 1, 1, 'GREAT ONE'),
-(3, 1, 1, 'Awesome!!!'),
-(4, 1, 1, 'wow'),
-(5, 1, 1, 'excellent!!!'),
-(107, 95, 5, 'asdsd'),
-(108, 2, 5, 'ds');
 
 -- --------------------------------------------------------
 
@@ -250,21 +178,6 @@ CREATE TABLE `history` (
   `FEEDBACK` tinyint(1) NOT NULL,
   `MED_CODE` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `history`
---
-
-INSERT INTO `history` (`DOC_ID`, `PATIENT_ID`, `PATIENT_NAME`, `PHONE_NUMBER`, `DATE`, `TIME`, `FEEDBACK`, `MED_CODE`) VALUES
-(2, 5, 'Shah', 2147483647, '2023-03-14', '12:00:00', 1, '2CrOIdq2k2'),
-(2, 5, 'Shah', 2147483647, '2023-03-25', '18:00:00', 1, 'e6yd55SJgD'),
-(2, 5, 'Shah', 2147483647, '2023-03-30', '10:00:00', 1, 'W6dRr8M0LD'),
-(2, 5, 'Shah', 2147483647, '2023-03-31', '19:00:00', 1, 'd0qWJQyJhB'),
-(2, 5, 'Shah', 2147483647, '2023-04-01', '19:00:00', 1, '2YUOLakNhf'),
-(2, 5, 'Shah', 2147483647, '2023-04-07', '11:00:00', 1, 'p8a2bDt1gN'),
-(2, 5, 'Shah', 2147483647, '2023-05-04', '12:00:00', 0, '6DPIh6U3Gf'),
-(95, 5, 'Shah', 2147483647, '2023-03-28', '19:00:00', 1, '5QLmMAthqH'),
-(95, 5, 'Shah', 2147483647, '2023-03-30', '17:00:00', 1, 'rTYQNbkY9j');
 
 -- --------------------------------------------------------
 
@@ -391,8 +304,8 @@ INSERT INTO `patient` (`PATIENT_ID`, `NAME`, `GENDER`, `DOB`, `EMAIL`, `PHONE_NU
 (1, 'pat1', 'Male', '1999-04-29', 'pat1@gmail.com', 76475, 'Sin', 'ploc1'),
 (2, 'pat2', 'Female', '1990-07-04', 'pat2@gmail.com', 653743647, 'Mar', 'ploc2'),
 (3, 'pat3', 'Male', '2020-06-24', 'pat3@gmail.com', 76876876, 'Married', 'ploc3'),
-(4, 'Shahab Hamdani', 'Male', '2023-03-08', 'mkO@gmail.com', 3065949602, 'Single', 'KH-1238'),
-(5, 'Shah', 'Male', '2023-03-16', 'patient@gmail.com', 3065949602, 'Married', 'KH-1238');
+(4, 'Rikza', 'Female', '2023-03-08', 'rikza@gmail.com', 3065949602, 'Single', 'Rawalpindi'),
+(5, 'Uswa', 'Female', '2023-03-16', 'uswa@gmail.com', 3065949602, 'Married', 'Rawalpindi');
 
 -- --------------------------------------------------------
 
@@ -414,8 +327,8 @@ INSERT INTO `patientcredentials` (`PATIENT_ID`, `EMAIL`, `PASSWORD`) VALUES
 (1, 'pat1@gmail.com', 'ppass1'),
 (2, 'pat2@gmail.com', 'ppass2'),
 (3, 'pat3@gmail.com', 'ppass3'),
-(4, 'mkO@gmail.com', '12345678'),
-(5, 'patient@gmail.com', '123');
+(4, 'rikza@gmail.com', 'rikza123'),
+(5, 'uswa@gmail.com', 'uswa123');
 
 -- --------------------------------------------------------
 
@@ -428,22 +341,6 @@ CREATE TABLE `prescription` (
   `MEDICINE` varchar(255) NOT NULL,
   `MED_CODE` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `prescription`
---
-
-INSERT INTO `prescription` (`id`, `MEDICINE`, `MED_CODE`) VALUES
-(28, 'Actonel,169.53,Aldara,124.89,Amlodipine,12.34', '2CrOIdq2k2'),
-(31, 'Bupropion,30,Gabapentin,11.99,Losartan,11.99,Lisinopril,10.49,Brilinta,385.42', '2YUOLakNhf'),
-(33, 'Actos,354.09,Amitiza,358.53,Asacol,638.48,Amoxicillin,15.99,Fluconazole,13.49,Fluoxetine,13.49,Amlodipine,9.99,Tamsulosin,16.99', '5QLmMAthqH'),
-(36, 'Actos,354.09,Aggrenox,228.78,Asacol,638.48,Allegra,51.41', '6DPIh6U3Gf'),
-(34, 'Actos,354.09,Aldactone,23.07,Ambien,155.91', 'd0qWJQyJhB'),
-(29, 'Amitriptyline,16.86,Ambien,155.91,Aricept,193.89', 'e6yd55SJgD'),
-(30, 'Pantoprazole,13.99,Fluconazole,13.49,Doxycycline,12.99', 'nWDRMMzPO4'),
-(35, 'Aggrenox,228.78', 'p8a2bDt1gN'),
-(32, 'Meloxicam,9.99,Warfarin,12.49,Clonazepam,15.49,Gabapentin,11.99,Metformin,12.99,Clindamycin,31.09,Brilinta,385.42,Augmentin,20.5,Asacol,638.48', 'rTYQNbkY9j'),
-(27, 'Aldactone,23.07', 'W6dRr8M0LD');
 
 -- --------------------------------------------------------
 
@@ -484,25 +381,13 @@ CREATE TABLE `validdoctor` (
 --
 
 INSERT INTO `validdoctor` (`DOC_ID`, `NAME`, `EMAIL`, `PHONE_NUMBER`, `FEE`, `SPECIALIZATION`, `LOCATION`, `REGNO`) VALUES
-(1, 'doc1', '', 0, 100, 'spl1', 'dloc1', ''),
-(2, 'doc2', 'doc2@gmail.com', 62354, 200, 'spl2', 'dloc2', ''),
-(3, 'doc3', 'doc3@gmail.com', 364587, 300, 'spl3', 'dloc3', ''),
-(4, 'doc4', 'doc4@gmail.com', 343, 99, 'spl4', 'dloc4', ''),
-(5, 'doc5', 'doc5@gmail.com', 324324, 0, 'spl5', 'dloc5', ''),
-(6, 'doc6', 'doc6@gmail.com', 9423659, 0, 'spl6', 'dloc6', ''),
-(9, 'doc8', 'doc8@gmail.com', 23523, 0, 'spl8', 'dloc8', ''),
-(10, 'doc7', 'doc7@gmail.com', 3224, 0, 'spl7', 'dloc7', ''),
-(19, 'doc10', 'doc10@gmail.com', 123454, 0, 'spl10', 'dloc10', ''),
-(27, 'doc11', 'doc11@gmail.com', 123454, 0, 'spl11', 'dloc11', ''),
-(30, 'doc12', 'doc12@gmail.com', 123454, 0, 'spl12', 'dloc12', ''),
-(61, 'doc19', 'doc19@gmail.com', 123454, 0, 'spl19', 'dloc19', ''),
-(74, 'doc20', 'doc20@gmail.com', 123454, 0, 'spl20', 'dloc20', ''),
-(82, 'doc23', 'doc23@gmail.com', 2525534, 0, 'spl23', 'dloc23', ''),
-(83, 'doc24', 'doc24@gmail.com', 1375325, 0, 'spl24', 'dloc24', ''),
-(85, 'doc25', 'doc25@gmail.com', 765879346, 0, 'spl25', 'dloc25', ''),
-(92, 'TEST1', 'test1@gmail.com', 3065949602, 0, 'phd', 'USA', '9877'),
-(94, 'TEST22', 'test22@gmail.com', 3065949602, 800, 'phd', 'USA', '9877'),
-(95, 'TestDoc', 'testdoc@gmail.com', 0, 900, 'Phd', 'USA', '000');
+(1, 'Dr, Hamza Faroo', 'doc1@gmai.com', 3430000000, 500, 'FPSC', 'Islamabad', '3499'),
+(2, 'Dr. Naila Shahi', 'doc2@gmail.com', 3430322233, 1500, 'Gynecologist', 'Rawalpindi', '3923'),
+(3, 'Dr. Burhan Amja', 'doc3@gmail.com', 3430000003, 1400, 'Orthopedist ', 'Taxila', '2323'),
+(4, 'Dr. Wajid Shah', 'doc4@gmail.com', 3430000000, 500, 'MBBS', 'Islamabad', '2324'),
+(5, 'Dr. Fatima Tahi', 'doc5@gmail.com', 3430000000, 1000, 'ENT Specialist', 'Rawalpindi', '3245'),
+(6, 'Dr Zubair ', 'doc6@gmail.com', 3430000000, 2000, 'Gastroentologis', 'Rawalpindi', '4521'),
+(9, 'Dr. Shahid', 'doc8@gmail.com', 3430000000, 3000, 'Neurologist', 'Rawalpindi', '9893');
 
 --
 -- Indexes for dumped tables
@@ -619,7 +504,7 @@ ALTER TABLE `blogs`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `SL_NO` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `SL_NO` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT for table `medicine_inventory`
@@ -643,7 +528,7 @@ ALTER TABLE `patientcredentials`
 -- AUTO_INCREMENT for table `prescription`
 --
 ALTER TABLE `prescription`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `registerdoctor`
