@@ -7,7 +7,7 @@ require("@tensorflow/tfjs-backend-cpu");
 async function normalize(data) {
   const normalizedData = await data.map((item) => {
     const normalizedItem = {
-      GENDER: item.GENDER === "M" ? 1 : 0,
+      GENDER: item.GENDER === "M" ? "1" : 0,
       AGE: (item.AGE - 30) / 50,
       SMOKING: parseInt(item.SMOKING),
       YELLOW_FINGERS: parseInt(item.YELLOW_FINGERS),
@@ -90,11 +90,14 @@ async function trainModel() {
           })
         );
         model.add(tf.layers.dense({ units: 1, activation: "sigmoid" }));
+
         model.compile({ loss: "binaryCrossentropy", optimizer: "adam" });
 
         // Train the model
         console.log("Waiting for model to be trained . . .");
+
         await model.fit(xs, ys, { epochs: 500 });
+        
         console.log("Mode Trained");
       }
     });
@@ -108,6 +111,7 @@ trainModel();
 
 
 async function trainAndPredict(userdata, res) {
+  
   console.log(userdata);
 
   inputTensor = tf.tensor2d(userdata, [1, userdata.length]);

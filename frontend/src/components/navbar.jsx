@@ -6,9 +6,6 @@ import SignOutBtn from "./signOutBtn";
 
 class Navbar extends Component {
 
-
-
-
   expandMenuBar = () => {
     document.getElementsByClassName("sideMenu")[0].classList.toggle("sideMenuDisplay");
     document.getElementsByClassName("sideMenu")[0].classList.toggle("sideMenuDisp");
@@ -16,9 +13,6 @@ class Navbar extends Component {
     document.getElementById("5").classList.toggle("two");
     document.getElementById("6").classList.toggle("three");
   };
-
-
-
 
   closeSideMenu = () => {
     document
@@ -59,8 +53,6 @@ class Navbar extends Component {
               <Link to="/">
                 <button>Home</button>
               </Link>
-
-              
               <Link to="/signinTabSel">
                 <button  >Sign In</button>
               </Link>

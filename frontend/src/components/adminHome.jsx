@@ -18,7 +18,7 @@ class AdminHome extends Component {
   componentDidMount() {
     this._isMounted = true;
 
-    fetch("http://127.0.0.1:3001/admin/getRegisterDocs")
+    fetch("http://44.216.18.228:3001/admin/getRegisterDocs")
       .then((response) => response.json())
       .then((docs) => {
         if (docs === "NO" && this._isMounted) {
@@ -40,7 +40,7 @@ class AdminHome extends Component {
     if (this.state.validDoc.length) {
       this.setState({ tableHeading: heading, DocList: this.state.validDoc });
     } else {
-      fetch("http://127.0.0.1:3001/admin/getValidDocs")
+      fetch("http://44.216.18.228:3001/admin/getValidDocs")
         .then((response) => response.json())
         .then((res) => {
           if (res === "NO" && this._isMounted) {
@@ -65,7 +65,7 @@ class AdminHome extends Component {
       // console.log(this.state.allDocs);
       this.setState({ tableHeading: heading, DocList: this.state.allDocs });
     } else {
-      fetch("http://127.0.0.1:3001/admin/getAllDocs")
+      fetch("http://44.216.18.228:3001/admin/getAllDocs")
         .then((response) => response.json())
         .then((res) => {
           if (res === "NO" && this._isMounted) {
@@ -97,7 +97,7 @@ class AdminHome extends Component {
 
   handleValid = (id, i) => {
     console.log("Valid: ", id);
-    fetch(`http://127.0.0.1:3001/admin/validDoc/${id}`);
+    fetch(`http://44.216.18.228:3001/admin/validDoc/${id}`);
     // window.location.reload();
     let DocList = [...this.state.DocList];
     DocList.splice(i, 1);
@@ -108,7 +108,7 @@ class AdminHome extends Component {
 
   handleInvalid = (id, i) => {
     console.log("Valid: ", id);
-    fetch(`http://127.0.0.1:3001/admin/invalidDoc/${id}`, { method: "delete" });
+    fetch(`http://44.216.18.228:3001/admin/invalidDoc/${id}`, { method: "delete" });
     let DocList = [...this.state.DocList];
     DocList.splice(i, 1);
     this.setState({ DocList });

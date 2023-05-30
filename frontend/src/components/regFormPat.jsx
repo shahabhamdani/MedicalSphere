@@ -66,7 +66,7 @@ class RegFormPat extends Component {
         address: this.state.address,
       }),
     };
-    fetch("http://127.0.0.1:3001/registerPatient", load)
+    fetch("http://44.216.18.228:3001/registerPatient", load)
       .then((response) => response.json())
       .then((pat) => {
         if (pat.NAME === this.state.name) {
