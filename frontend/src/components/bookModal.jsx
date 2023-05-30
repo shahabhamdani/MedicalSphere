@@ -31,7 +31,7 @@ class BookModal extends Component {
     document.getElementById("waitDiv").style.display = "block";
     this.setState({ AppDate: d.target.value });
     fetch(
-      `http://localhost:3001/patient/avlTime?doc_id=${this.state.doc_id}&date=${d.target.value}`
+      `http://44.216.18.228:3001/patient/avlTime?doc_id=${this.state.doc_id}&date=${d.target.value}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -61,7 +61,7 @@ class BookModal extends Component {
       }),
     };
     // console.log(load);
-    fetch(`http://localhost:3001/patient/bookAppointment`, load)
+    fetch(`http://44.216.18.228:3001/patient/bookAppointment`, load)
       .then((res) => res.json())
       .then((res) => {
         if (res === "Booked!") {
@@ -129,7 +129,7 @@ class BookModal extends Component {
             </div>
 
             <div class="form-group">
-              <label for="app_time">Date:</label>
+              <label for="app_time">Time:</label>
 
               <select                 class="form-control"
  id="app_time" onChange={this.setTime}>
