@@ -47,7 +47,7 @@ export default class BlogCrud extends Component {
   };
 
   componentDidMount() {
-    fetch("http://44.216.18.228:3001/blogs")
+    fetch("https://gotyour693.com:3001/blogs")
       .then((response) => response.json())
       .then((data) => {
         this.setState({ blogs: data });
@@ -73,7 +73,7 @@ export default class BlogCrud extends Component {
       time: this.state.time,
     };
 
-    fetch("http://44.216.18.228:3001/admin/blogs", {
+    fetch("https://gotyour693.com:3001/admin/blogs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +110,7 @@ export default class BlogCrud extends Component {
       date: this.state.date,
       time: this.state.time,
     };
-    fetch(`http://44.216.18.228:3001/admin/blogs/${this.state.id}`, {
+    fetch(`https://gotyour693.com:3001/admin/blogs/${this.state.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -152,7 +152,7 @@ export default class BlogCrud extends Component {
   }
 
   handleDeleteBlog(id) {
-    fetch(`http://44.216.18.228:3001/admin/blogs/${id}`, {
+    fetch(`https://gotyour693.com:3001/admin/blogs/${id}`, {
       method: "DELETE",
     }).then((response) => {
       if (response.status === 200) {
