@@ -16,7 +16,7 @@ class blog extends Component {
   }
   
   componentDidMount() {
-    fetch(`http://localhost:3001/blogs/${this.props.params.id}`)
+    fetch(`http://44.216.18.228:3001/blogs/${this.props.params.id}`)
       .then((response) => response.json())
       .then((data) => {
         this.setState({

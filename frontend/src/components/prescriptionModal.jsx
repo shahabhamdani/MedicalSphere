@@ -38,7 +38,7 @@ class PrescriptionModal extends Component {
   }
 
   getMedicines = () => {
-    fetch("http://localhost:3001/getInventory")
+    fetch("http://44.216.18.228:3001/getInventory")
       .then((response) => response.json())
       .then((meds) => {
         if (meds === "NO") {
@@ -68,7 +68,7 @@ class PrescriptionModal extends Component {
       }),
     };
     console.log(load);
-    fetch(`http://localhost:3001/doctor/addPrescription`, load)
+    fetch(`http://44.216.18.228:3001/doctor/addPrescription`, load)
       .then((res) => res.json())
       .then((res) => {
         if (res === "Added!") {
@@ -114,7 +114,7 @@ class PrescriptionModal extends Component {
 
               {/* <label for="app_time">PatientID:{this.state.pat_id}</label><br></br>  */}
 
-              <label for="app_time">Date:</label>
+              <label for="app_time">Medicines:</label>
 
               <select
                 class="form-control"

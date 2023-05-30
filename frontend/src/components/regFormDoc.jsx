@@ -57,7 +57,7 @@ class RegFormDoc extends Component {
       }),
     };
     // console.log(load);
-    fetch("http://localhost:3001/registerDoc", load)
+    fetch("http://44.216.18.228:3001/registerDoc", load)
       .then((response) => response.json())
       .then((doc) => {
         if (doc.NAME === this.state.name) {

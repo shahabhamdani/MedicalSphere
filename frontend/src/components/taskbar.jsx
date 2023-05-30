@@ -95,7 +95,7 @@ class Taskbar extends Component {
       btn3 = "All Doctors";
       btn6 = (
       <button id="blogs" onClick={this.handleBlogs}>
-          Bologs
+          Blogs
         </button>);
 
 
