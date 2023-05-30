@@ -57,7 +57,7 @@ class SignInForm extends Component {
       }),
     };
 
-    fetch(`http://44.216.18.228:3001${requestPath}`, load)
+    fetch(`http://127.0.0.1:3001${requestPath}`, load)
       .then((response) => response.json())
       .then((user) => {
         if (user === "Network error") {

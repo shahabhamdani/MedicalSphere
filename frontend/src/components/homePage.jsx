@@ -66,7 +66,7 @@ class HomePage extends Component {
 
     console.log(data)
 
-    fetch("http://44.216.18.228:3001/lung-cancer-prediction/", {
+    fetch("http://127.0.0.1:3001/lung-cancer-prediction/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -82,7 +82,7 @@ class HomePage extends Component {
   };
 
   componentDidMount() {
-    fetch("http://44.216.18.228:3001/blogs")
+    fetch("http://127.0.0.1:3001/blogs")
       .then((response) => response.json())
       .then((data) => {
         this.setState({ blogs: data });

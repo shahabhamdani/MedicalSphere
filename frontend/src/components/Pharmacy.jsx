@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
-const API_URL = "http://44.216.18.228:3001/patient/getPharmacy/";
+const API_URL = "http://127.0.0.1:3001/patient/getPharmacy/";
 
 export default function Pharmacy() {
   const [medicines, setMedicines] = useState([]);
