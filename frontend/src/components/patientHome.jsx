@@ -28,7 +28,7 @@ class PatientHome extends Component {
     let patient = this.props.patient;
 
 
-    fetch(`https://gotyour693.com:3001/patient/getFeedback/${patient.PATIENT_ID}`)
+    fetch(`http://44.216.18.228:3001/patient/getFeedback/${patient.PATIENT_ID}`)
     .then((res) => res.json())
     .then((res) => {
       if (res !== "NO")
@@ -46,7 +46,7 @@ class PatientHome extends Component {
 
   componentDidMount() {
     // fetch(
-    //   `https://gotyour693.com:3001/getInventory/`
+    //   `http://44.216.18.228:3001/getInventory/`
     // )
     //   .then((res) => res.json())
     //   .then((res) => { console.log(  res)});
@@ -57,7 +57,7 @@ class PatientHome extends Component {
     let patient = this.props.patient;
 
     fetch(
-      `https://gotyour693.com:3001/patient/getPatientMatrics/${patient.PATIENT_ID}`
+      `http://44.216.18.228:3001/patient/getPatientMatrics/${patient.PATIENT_ID}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -70,7 +70,7 @@ class PatientHome extends Component {
     this._isMounted = true;
 
 
-    fetch("https://gotyour693.com:3001/patient/getDoctor")
+    fetch("http://44.216.18.228:3001/patient/getDoctor")
       .then((response) => response.json())
       .then((docs) => {
         if (docs === "NO" && this._isMounted) {
@@ -122,7 +122,7 @@ class PatientHome extends Component {
     } else {
       let patient = this.props.patient;
       fetch(
-        `https://gotyour693.com:3001/patient/getAppointments/${patient.PATIENT_ID}`
+        `http://44.216.18.228:3001/patient/getAppointments/${patient.PATIENT_ID}`
       )
         .then((res) => res.json())
         .then((res) => {
@@ -171,7 +171,7 @@ class PatientHome extends Component {
     } else {
       let patient = this.props.patient;
       fetch(
-        `https://gotyour693.com:3001/patient/getPrescriptions/${patient.PATIENT_ID}`
+        `http://44.216.18.228:3001/patient/getPrescriptions/${patient.PATIENT_ID}`
       )
         .then((res) => res.json())
         .then((res) => {
@@ -201,7 +201,7 @@ class PatientHome extends Component {
     } else {
       let patient = this.props.patient;
       fetch(
-        `https://gotyour693.com:3001/patient/getFeedBackDocList/${patient.PATIENT_ID}`
+        `http://44.216.18.228:3001/patient/getFeedBackDocList/${patient.PATIENT_ID}`
       )
         .then((res) => res.json())
         .then((res) => {
@@ -232,7 +232,7 @@ class PatientHome extends Component {
       sl_no: sl_no,
     };
 
-    fetch("https://gotyour693.com:3001/patient/deleteFeedback", {
+    fetch("http://44.216.18.228:3001/patient/deleteFeedback", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -265,7 +265,7 @@ class PatientHome extends Component {
         remark: r,
       }),
     };
-    fetch("https://gotyour693.com:3001/patient/giveFeedback", load)
+    fetch("http://44.216.18.228:3001/patient/giveFeedback", load)
       .then((res) => res.json())
       .then((res) => {
         if (res === "SUCCESSFUL") {

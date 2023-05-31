@@ -23,7 +23,7 @@ class DoctorHome extends Component {
   componentDidMount() {
     let doctor = this.props.doctor;
 
-    fetch(`https://gotyour693.com:3001/doctor/getDoctorMetrics/${doctor.DOC_ID}`)
+    fetch(`http://44.216.18.228:3001/doctor/getDoctorMetrics/${doctor.DOC_ID}`)
       .then((res) => res.json())
       .then((res) => {
         if (res !== "NO")
@@ -36,7 +36,7 @@ class DoctorHome extends Component {
 
     if (this.state.docDetails) {
       fetch(
-        `https://gotyour693.com:3001/doctor/getAppointments/${this.state.docDetails.DOC_ID}`
+        `http://44.216.18.228:3001/doctor/getAppointments/${this.state.docDetails.DOC_ID}`
       )
         .then((res) => res.json())
         .then((Appointments) => {
@@ -71,7 +71,7 @@ class DoctorHome extends Component {
     };
 
     // console.log(load);
-    fetch("https://gotyour693.com:3001/doctor/confirmAppointment", load)
+    fetch("http://44.216.18.228:3001/doctor/confirmAppointment", load)
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
@@ -95,7 +95,7 @@ class DoctorHome extends Component {
       method: "DELETE",
     };
     fetch(
-      `https://gotyour693.com:3001/doctor/appointments/cancelApp?doc_id=${d_id}&pat_id=${p_id}&date=${dat}&time_slot=${time}`,
+      `http://44.216.18.228:3001/doctor/appointments/cancelApp?doc_id=${d_id}&pat_id=${p_id}&date=${dat}&time_slot=${time}`,
       load
     )
       .then((res) => res.json())
@@ -136,7 +136,7 @@ class DoctorHome extends Component {
         emptyListMsg: "",
       });
     } else {
-      fetch("https://gotyour693.com:3001/doctor/getConfAppointments/" + d_id)
+      fetch("http://44.216.18.228:3001/doctor/getConfAppointments/" + d_id)
         .then((res) => res.json())
         .then((res) => {
           if (res === "NO" && this._isMounted) {
@@ -171,7 +171,7 @@ class DoctorHome extends Component {
         medCode: a.MED_CODE,
       }),
     };
-    fetch("https://gotyour693.com:3001/doctor/treated", load)
+    fetch("http://44.216.18.228:3001/doctor/treated", load)
       .then((res) => res.json())
       .then((res) => {
         if (res === "Moved to history") {
@@ -189,7 +189,7 @@ class DoctorHome extends Component {
     let load = {
       method: "DELETE",
     };
-    let url = `https://gotyour693.com:3001/doctor/missedAppointment?doc_id=${a.DOC_ID}`;
+    let url = `http://44.216.18.228:3001/doctor/missedAppointment?doc_id=${a.DOC_ID}`;
     url += `&pat_id=${a.PATIENT_ID}&date=${a.DATE}&time_slot=${a.TIME}`;
     fetch(url, load)
       .then((res) => res.json())
@@ -214,7 +214,7 @@ class DoctorHome extends Component {
         emptyListMsg: "",
       });
     } else {
-      fetch("https://gotyour693.com:3001/doctor/getHistory/" + d_id)
+      fetch("http://44.216.18.228:3001/doctor/getHistory/" + d_id)
         .then((res) => res.json())
         .then((res) => {
           if (res === "NO" && this._isMounted) {
@@ -243,7 +243,7 @@ class DoctorHome extends Component {
         emptyListMsg: "",
       });
     } else {
-      fetch("https://gotyour693.com:3001/doctor/getFeedbacks/" + d_id)
+      fetch("http://44.216.18.228:3001/doctor/getFeedbacks/" + d_id)
         .then((res) => res.json())
         .then((res) => {
           if (res === "NO" && this._isMounted) {

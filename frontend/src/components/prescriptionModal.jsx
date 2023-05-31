@@ -38,7 +38,7 @@ class PrescriptionModal extends Component {
   }
 
   getMedicines = () => {
-    fetch("https://gotyour693.com:3001/getInventory")
+    fetch("http://44.216.18.228:3001/getInventory")
       .then((response) => response.json())
       .then((meds) => {
         if (meds === "NO") {
@@ -68,7 +68,7 @@ class PrescriptionModal extends Component {
       }),
     };
     console.log(load);
-    fetch(`https://gotyour693.com:3001/doctor/addPrescription`, load)
+    fetch(`http://44.216.18.228:3001/doctor/addPrescription`, load)
       .then((res) => res.json())
       .then((res) => {
         if (res === "Added!") {

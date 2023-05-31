@@ -18,7 +18,7 @@ export default class patientFeedback extends Component {
   //     sl_no: sl_no,
   //   };
 
-  //   fetch("https://gotyour693.com:3001/patient/deleteFeedback", {
+  //   fetch("http://44.216.18.228:3001/patient/deleteFeedback", {
   //     method: "DELETE",
   //     headers: {
   //       "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export default class patientFeedback extends Component {
   componentDidMount() {
     let patient = this.props.patient;
 
-    // fetch(`https://gotyour693.com:3001/patient/getFeedback/${patient.PATIENT_ID}`)
+    // fetch(`http://44.216.18.228:3001/patient/getFeedback/${patient.PATIENT_ID}`)
     //   .then((res) => res.json())
     //   .then((res) => {
     //     if (res !== "NO")
@@ -46,7 +46,7 @@ export default class patientFeedback extends Component {
     //   });
 
     // fetch(
-    //   `https://gotyour693.com:3001/patient/getFeedBackDocList/${patient.PATIENT_ID}`
+    //   `http://44.216.18.228:3001/patient/getFeedBackDocList/${patient.PATIENT_ID}`
     // )
     //   .then((res) => res.json())
     //   .then((res) => {
